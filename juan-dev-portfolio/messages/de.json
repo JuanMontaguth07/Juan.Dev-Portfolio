@@ -228,6 +228,16 @@
       "title": "Wetter-App",
       "description": "Eine Wetter-App, die eine externe API nutzt und ihre Darstellung je nach Uhrzeit und Tageszeit ändert."
     },
+    "sayfer": {
+      "title": "SAYFER",
+      "description": "Ein Geflügelverwaltungssystem zur Kontrolle von Bestand und Produktion einer Farm, im Team als Ausbildungsprojekt des SENA entwickelt.",
+      "whatIBuilt": [
+        "Bestands- und Produktionskontrolle",
+        "Erfassung von Fütterung, Medikamenten und Sterblichkeit",
+        "Organisation und Verwaltung der Datenbank",
+        "Geschäftslogik für eine reale Umgebung im Geflügelsektor"
+      ]
+    },
     "legalResearch": {
       "title": "Softwareanalyse für Anwälte",
       "description": "Recherche zu einer Alternative zu Icarus: Interviews und Umfragen über Google Forms, um zu verstehen, was Anwälte wirklich von so einer Software brauchen.",

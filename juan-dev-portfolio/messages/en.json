@@ -228,6 +228,16 @@
       "title": "Weather App",
       "description": "A weather app that pulls from an external API and changes its visualization based on the time and moment of the day."
     },
+    "sayfer": {
+      "title": "SAYFER",
+      "description": "A poultry management system to track a farm's inventory and production, built as a team for a SENA training project.",
+      "whatIBuilt": [
+        "Inventory and production control",
+        "Logging of feeding, medication and mortality",
+        "Database organization and handling",
+        "Business logic designed for a real poultry-sector environment"
+      ]
+    },
     "legalResearch": {
       "title": "Software Analysis for Lawyers",
       "description": "Research into an alternative to Icarus: interviews and surveys via Google Forms to understand what lawyers actually need from software like that.",

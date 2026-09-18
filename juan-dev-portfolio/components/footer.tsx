@@ -61,7 +61,9 @@ export function Footer() {
             </p>
             <div className="mt-4 flex items-center gap-3">
               <a
-                href={`mailto:${siteConfig.email}`}
+                href={siteConfig.gmailCompose}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={siteConfig.email}
                 className={socialLinkClasses}
               >

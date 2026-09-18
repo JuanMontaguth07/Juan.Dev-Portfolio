@@ -22,7 +22,7 @@ const LINKS: ContactLink[] = [
   {
     key: "email",
     value: siteConfig.email,
-    href: `mailto:${siteConfig.email}`,
+    href: siteConfig.gmailCompose,
     icon: Mail,
   },
   {
@@ -76,6 +76,8 @@ export function ContactSection() {
                 <li key={key}>
                   <a
                     href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={cn(
                       glassCard,
                       "group flex items-center gap-3 rounded-xl px-3.5 py-2.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-500/30 hover:shadow-md hover:shadow-cyan-500/10 dark:hover:border-cyan-400/30 dark:hover:shadow-cyan-400/10",
@@ -98,7 +100,9 @@ export function ContactSection() {
             </ul>
 
             <a
-              href={`mailto:${siteConfig.email}`}
+              href={siteConfig.gmailCompose}
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-7 flex w-full items-center justify-center gap-2 rounded-full bg-linear-to-r from-cyan-500 to-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-xl shadow-cyan-500/25 transition-transform hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-cyan-500/40 focus-visible:outline-none dark:from-cyan-400 dark:to-blue-600 dark:shadow-cyan-400/40"
             >
               <Mail className="h-4 w-4" />

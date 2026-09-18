@@ -61,7 +61,9 @@ export function Hero() {
               {t("ctaCv")}
             </a>
             <a
-              href={`mailto:${siteConfig.email}`}
+              href={siteConfig.gmailCompose}
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label={t("ctaEmailLabel")}
               className="flex h-11 w-11 items-center justify-center rounded-full border border-black/15 text-slate-700 transition-colors hover:bg-black/5 dark:border-white/15 dark:text-zinc-200 dark:hover:bg-white/5"
             >

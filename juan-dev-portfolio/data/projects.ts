@@ -56,6 +56,20 @@ export const featuredProject: Project = {
   collaboration: "solo",
 };
 
+const sayfer: Project = {
+  slug: "sayfer",
+  messageKey: "sayfer",
+  href: "/projects/sayfer",
+  categories: ["web", "fullstack"],
+  tags: ["Java", "JavaScript", "HTML5", "CSS3"],
+  gradient: "from-amber-400/50 via-yellow-500/25 to-slate-950",
+  status: "finished",
+  image: "/images/projects/sayfer.svg",
+  collaboration: "team",
+  // Confirmed: the user plus 4 other people.
+  teamSize: 5,
+};
+
 const hardwareMarketplace: Project = {
   slug: "hardware-marketplace",
   messageKey: "hardwareMarketplace",
@@ -103,6 +117,7 @@ const legalResearch: Project = {
 
 export const projects: Project[] = [
   featuredProject,
+  sayfer,
   hardwareMarketplace,
   hardwareStore,
   weatherApp,

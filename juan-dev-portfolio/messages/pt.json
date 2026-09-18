@@ -228,6 +228,16 @@
       "title": "App do Clima",
       "description": "Um aplicativo de clima que consome uma API externa e muda sua visualização de acordo com a hora e o momento do dia."
     },
+    "sayfer": {
+      "title": "SAYFER",
+      "description": "Sistema de gestão avícola para controlar o estoque e a produção de uma granja, desenvolvido em equipe como projeto formativo do SENA.",
+      "whatIBuilt": [
+        "Controle de estoque e produção",
+        "Registro de alimentação, medicamentos e mortalidade",
+        "Organização e manejo do banco de dados",
+        "Lógica de negócio pensada para um ambiente real do setor avícola"
+      ]
+    },
     "legalResearch": {
       "title": "Análise de software para advogados",
       "description": "Pesquisa sobre uma alternativa ao Icarus: entrevistas e formulários pelo Google Forms para entender o que os advogados realmente precisam de um software assim.",
