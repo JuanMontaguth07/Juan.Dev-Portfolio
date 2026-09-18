@@ -1,0 +1,262 @@
+{
+  "Nav": {
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "skills": "Habilidades",
+    "projects": "Proyectos",
+    "contact": "Contacto",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  },
+  "Hero": {
+    "badge": "Desarrollador Full Stack",
+    "greeting": "Hola, soy",
+    "firstName": "Juan",
+    "lastName": "Dev",
+    "description": "Creo experiencias digitales premium con código, diseño y movimiento. Construyo interfaces inmersivas, cinematográficas y funcionales para marcas y productos modernos.",
+    "ctaProjects": "Ver mis proyectos",
+    "ctaCv": "Descargar CV",
+    "ctaEmailLabel": "Enviar correo"
+  },
+  "Stats": {
+    "projects": "Proyectos",
+    "experience": "Año de experiencia",
+    "commitment": "Compromiso",
+    "passion": "Pasión por crear"
+  },
+  "About": {
+    "eyebrow": "Sobre mí",
+    "hook": "No quiero limitarme a programar. <hl>Quiero construir.</hl>",
+    "intro1": "Soy <b>Juan Diego</b>, estudiante de <b>Análisis y Desarrollo de Software</b> y alguien que aprende mejor cuando tiene un problema delante y algo que construir.",
+    "intro2": "Mi camino en el desarrollo de software ha nacido principalmente de la curiosidad. Una idea puede empezar como una pregunta sencilla —<i>“¿y si esto pudiera hacerse de otra manera?”</i>— y terminar convirtiéndose en un MVP, una aplicación, una base de datos o un sistema completo.",
+    "intro3": "Me interesan especialmente los proyectos que conectan <b>software con problemas del mundo real</b>: procesos que pueden automatizarse, información que puede organizarse mejor y herramientas que pueden hacer que una persona trabaje de una manera más sencilla.",
+    "intro4": "Por eso no me interesa aprender una tecnología únicamente para poder decir que la conozco. Quiero entender <b>por qué existe, cuándo utilizarla y cómo encaja dentro de un sistema más grande</b>.",
+    "intro5": "Actualmente estoy fortaleciendo mis bases en desarrollo de software, bases de datos y arquitectura de aplicaciones. También estoy explorando cómo pasar de pequeños proyectos y MVPs a aplicaciones más completas, mantenibles y capaces de crecer.",
+    "processLabel": "Mi forma de construir",
+    "process": [
+      {
+        "number": "01",
+        "title": "Imaginar",
+        "description": "Todo comienza con una idea. No importa si todavía está incompleta."
+      },
+      {
+        "number": "02",
+        "title": "Entender",
+        "description": "Intento descubrir qué problema existe realmente y qué necesita la persona que lo va a utilizar."
+      },
+      {
+        "number": "03",
+        "title": "Construir",
+        "description": "Convierto la idea en algo funcional lo antes posible. Un prototipo que pueda verse, probarse y cuestionarse."
+      },
+      {
+        "number": "04",
+        "title": "Iterar",
+        "description": "Lo pruebo, encuentro lo que está mal, aprendo y vuelvo a construir."
+      }
+    ],
+    "closingQuote": "Porque para mí, programar no consiste únicamente en escribir código. Consiste en <b>tomar algo que todavía no existe y convertirlo en algo que pueda utilizarse.</b>",
+    "beyondTitle": "Más allá del código",
+    "beyondIntro": "Todavía estoy construyendo mi camino.",
+    "beyondParagraph": "Quiero seguir aprendiendo, experimentar con nuevas tecnologías y enfrentar proyectos cada vez más grandes. Me interesa llegar al punto en el que una idea no se quede en una carpeta llamada <code>proyecto_final_v7_definitivo_ahora_si</code> 💀, sino que pueda convertirse en una solución real.",
+    "beyondClosing": "Este portafolio es parte de ese proceso.",
+    "beyondPullQuote": "No representa todo lo que sé. Representa todo lo que estoy construyendo para llegar a saber más.",
+    "focusLabel": "Actualmente enfocado en",
+    "chips": [
+      "Desarrollo de aplicaciones",
+      "Sistemas de gestión",
+      "Bases de datos",
+      "Automatización de procesos",
+      "Arquitectura de aplicaciones",
+      "Construcción de MVPs"
+    ]
+  },
+  "Skills": {
+    "eyebrow": "Habilidades",
+    "title": "Herramientas con las que construyo",
+    "intro": "No se trata de acumular tecnologías. Se trata de conocer las herramientas suficientes para convertir una idea en una solución funcional y seguir aprendiendo cuando el proyecto exige algo nuevo.",
+    "groupDevelopment": "Desarrollo",
+    "levelLabel": "Familiaridad",
+    "groupData": "Datos y control de versiones",
+    "groupEnvironment": "Entorno y herramientas",
+    "groupApproaches": "Lo que estoy construyendo como desarrollador",
+    "descriptions": {
+      "html5": "Estructura y semántica web.",
+      "css3": "Diseño responsive, layouts y experiencias visuales.",
+      "javascript": "Lógica, interacción y desarrollo de funcionalidades.",
+      "python": "Automatización, lógica y desarrollo de aplicaciones.",
+      "php": "Desarrollo backend y aplicaciones web.",
+      "sql": "Consultas, manipulación y organización de datos.",
+      "mysql": "Diseño y gestión de bases de datos relacionales.",
+      "git": "Control de versiones y seguimiento del desarrollo.",
+      "github": "Repositorios, documentación y colaboración.",
+      "vscode": "Mi entorno principal para desarrollar y experimentar.",
+      "wordpress": "Creación y personalización de sitios web.",
+      "excel": "Organización, análisis y manejo de información.",
+      "tns": "Gestión y trabajo con información empresarial."
+    },
+    "approaches": {
+      "mvp": {
+        "title": "Desarrollo de MVP",
+        "description": "Convierto una idea en una primera versión funcional para poder probarla, encontrar problemas y evolucionarla."
+      },
+      "requirements": {
+        "title": "Análisis de requerimientos",
+        "description": "Intento entender primero qué problema existe, quién lo tiene y qué debería resolver la solución."
+      },
+      "databaseDesign": {
+        "title": "Diseño de bases de datos",
+        "description": "Organizo la información pensando en consistencia, relaciones y facilidad de mantenimiento."
+      },
+      "automation": {
+        "title": "Automatización",
+        "description": "Busco oportunidades para convertir procesos repetitivos en flujos más rápidos y confiables."
+      },
+      "problemSolving": {
+        "title": "Resolución de problemas",
+        "description": "Divido problemas grandes en partes pequeñas que puedan entenderse, probarse y resolverse."
+      },
+      "architecture": {
+        "title": "Arquitectura de aplicaciones",
+        "description": "Estoy fortaleciendo mi capacidad para pensar más allá de una funcionalidad aislada y entender cómo las distintas partes de una aplicación trabajan juntas."
+      },
+      "documentation": {
+        "title": "Documentación técnica",
+        "description": "Registro decisiones, procesos y funcionamiento para que un proyecto pueda entenderse incluso después de haber sido construido."
+      }
+    },
+    "learningLabel": "Actualmente aprendiendo",
+    "learningItems": [
+      "Desarrollo de aplicaciones",
+      "Arquitectura de software",
+      "Backend",
+      "Bases de datos",
+      "Automatización"
+    ],
+    "learningQuote": "No quiero aprender herramientas para llenar una lista. Quiero aprenderlas porque algún proyecto me obligó a necesitarlas."
+  },
+  "Contact": {
+    "eyebrow": "Contacto",
+    "title": "Hablemos",
+    "direct": {
+      "heading": "¿Hablamos?",
+      "description": "Escríbeme si tienes un proyecto, una idea, una oportunidad, o simplemente quieres ponerte en contacto.",
+      "emailLabel": "Correo",
+      "githubLabel": "GitHub",
+      "linkedinLabel": "LinkedIn",
+      "whatsappLabel": "WhatsApp",
+      "cta": "Enviarme un correo"
+    },
+    "form": {
+      "heading": "Envíame un mensaje",
+      "nameLabel": "Nombre",
+      "namePlaceholder": "Tu nombre",
+      "emailLabel": "Correo electrónico",
+      "emailPlaceholder": "tu@correo.com",
+      "subjectLabel": "Asunto",
+      "subjectPlaceholder": "¿De qué se trata?",
+      "messageLabel": "Mensaje",
+      "messagePlaceholder": "Cuéntame en qué estás pensando...",
+      "submit": "Enviar mensaje",
+      "submitting": "Enviando...",
+      "successTitle": "¡Mensaje enviado!",
+      "successDescription": "Gracias por escribir. Te responderé lo antes posible.",
+      "sendAnother": "Enviar otro mensaje",
+      "errorTitle": "Algo salió mal",
+      "errorDescription": "No se pudo enviar el mensaje. Intenta de nuevo o escríbeme directamente por correo.",
+      "errors": {
+        "nameRequired": "Escribe tu nombre.",
+        "emailRequired": "Escribe tu correo electrónico.",
+        "emailInvalid": "Ese correo no parece válido.",
+        "subjectRequired": "Escribe un asunto.",
+        "messageRequired": "Escribe tu mensaje.",
+        "messageTooShort": "Cuéntame un poco más (mínimo 10 caracteres)."
+      }
+    }
+  },
+  "FeaturedProject": {
+    "badge": "Proyecto Destacado",
+    "cta": "Ver proyecto"
+  },
+  "Projects": {
+    "title": "Proyectos Destacados",
+    "subtitle": "Soluciones digitales construidas con tecnologías modernas y enfoque en experiencia de usuario.",
+    "filterAll": "Todos",
+    "filterWeb": "Web Apps",
+    "filterTools": "Herramientas",
+    "filterDesign": "Diseño",
+    "filterFullstack": "Full Stack",
+    "filterResearch": "Investigación",
+    "cta": "Ver detalles",
+    "viewAll": "Ver todos los proyectos",
+    "noResults": "Todavía no tengo un proyecto publicado en esta categoría.",
+    "status": {
+      "mvp": "MVP",
+      "finished": "Terminado",
+      "inDevelopment": "En desarrollo",
+      "proposal": "Propuesta"
+    }
+  },
+  "ProjectData": {
+    "portfolio": {
+      "title": "Portafolio Personal",
+      "description": "Diseño, dirección y desarrollo propio: portafolio responsive con presentación, habilidades, proyectos y contacto, construido para aprender a llevar una idea hasta una aplicación lista para producción.",
+      "tagline": "Mi espacio para construir, experimentar y mostrar lo que estoy aprendiendo.",
+      "status": "Terminado · Desplegable",
+      "whatIBuilt": [
+        "Página personal responsive.",
+        "Presentación personal y trayectoria de aprendizaje.",
+        "Sección de habilidades y tecnologías.",
+        "Showcase de proyectos.",
+        "Sección de contacto.",
+        "Diseño adaptado a dispositivos móviles y escritorio.",
+        "Animaciones e interacciones de interfaz.",
+        "Estructura preparada para desplegarse en producción."
+      ],
+      "participation": "Diseño, dirección y desarrollo del proyecto. Utilicé herramientas de desarrollo asistido por IA como apoyo durante la implementación, pero las decisiones sobre estructura, funcionalidades, diseño y comportamiento del proyecto parten de mis propias instrucciones y criterios.",
+      "demonstrates": "Este proyecto representa mi capacidad para tomar una idea, definir cómo quiero que funcione y convertirla en una aplicación real. También es una forma de demostrar que no estoy aprendiendo tecnologías de manera aislada: estoy aprendiendo a integrarlas dentro de un proyecto completo."
+    },
+    "hardwareMarketplace": {
+      "title": "Marketplace de Hardware",
+      "description": "Plataforma para vender componentes y ensamblajes, con estimador de costos, perfiles de ensambladores, cuentas con comentarios y soporte presencial."
+    },
+    "hardwareStore": {
+      "title": "Tienda de Hardware",
+      "description": "Sitio para vender productos fabricados por nosotros y piezas sueltas, pensado para ser transparente con el cliente y con apoyo de IA para resolver dudas."
+    },
+    "weatherApp": {
+      "title": "App del Clima",
+      "description": "Aplicación del clima que consume una API externa y cambia su visualización según la hora y el momento del día."
+    },
+    "legalResearch": {
+      "title": "Análisis de software para abogados",
+      "description": "Investigación sobre una alternativa a Icarus: entrevistas y encuestas con Google Forms para entender qué necesitan los abogados de un software así.",
+      "tags": [
+        "Google Forms",
+        "Análisis de requerimientos",
+        "Investigación",
+        "Análisis comparativo"
+      ]
+    }
+  },
+  "ProjectDetail": {
+    "back": "Volver a proyectos",
+    "languagesLabel": "Lenguajes",
+    "howLabel": "Cómo lo hice",
+    "whatBuiltLabel": "Qué construí",
+    "demonstratesLabel": "Lo que estoy demostrando",
+    "solo": "Trabajo individual",
+    "team": "En equipo",
+    "teamOf": "Equipo de {count} personas"
+  },
+  "Footer": {
+    "tagline": "Mi espacio para construir, experimentar y mostrar lo que estoy aprendiendo.",
+    "navLabel": "Navegación",
+    "connectLabel": "Contacto",
+    "madeWith": "Hecho con Next.js, Tailwind CSS y Framer Motion.",
+    "rights": "Todos los derechos reservados."
+  },
+  "BackToTop": {
+    "label": "Volver arriba"
+  }
+}

@@ -1,0 +1,262 @@
+{
+  "Nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "Hero": {
+    "badge": "Full Stack Developer",
+    "greeting": "Hi, I'm",
+    "firstName": "Juan",
+    "lastName": "Dev",
+    "description": "I craft premium digital experiences with code, design and motion. I build immersive, cinematic and functional interfaces for modern brands and products.",
+    "ctaProjects": "View my projects",
+    "ctaCv": "Download CV",
+    "ctaEmailLabel": "Send email"
+  },
+  "Stats": {
+    "projects": "Projects",
+    "experience": "Year of experience",
+    "commitment": "Commitment",
+    "passion": "Passion for creating"
+  },
+  "About": {
+    "eyebrow": "About Me",
+    "hook": "I don't want to just code. <hl>I want to build.</hl>",
+    "intro1": "I'm <b>Juan Diego</b>, a student of <b>Software Analysis and Development</b>, and someone who learns best with a problem in front of them and something to build.",
+    "intro2": "My path into software development has mostly come from curiosity. An idea can start as a simple question —<i>“what if this could be done differently?”</i>— and end up becoming an MVP, an app, a database, or a full system.",
+    "intro3": "I'm especially drawn to projects that connect <b>software with real-world problems</b>: processes that can be automated, information that can be organized better, and tools that can make someone's work simpler.",
+    "intro4": "That's why I'm not interested in learning a technology just to say I know it. I want to understand <b>why it exists, when to use it, and how it fits into a bigger system</b>.",
+    "intro5": "Right now I'm strengthening my foundations in software development, databases, and application architecture. I'm also exploring how to go from small projects and MVPs to more complete, maintainable applications that can actually grow.",
+    "processLabel": "How I build",
+    "process": [
+      {
+        "number": "01",
+        "title": "Imagine",
+        "description": "It all starts with an idea. It doesn't matter if it's still incomplete."
+      },
+      {
+        "number": "02",
+        "title": "Understand",
+        "description": "I try to find out what problem actually exists and what the person using it needs."
+      },
+      {
+        "number": "03",
+        "title": "Build",
+        "description": "I turn the idea into something functional as soon as possible. A prototype that can be seen, tested, and questioned."
+      },
+      {
+        "number": "04",
+        "title": "Iterate",
+        "description": "I test it, find what's wrong, learn, and build it again."
+      }
+    ],
+    "closingQuote": "Because to me, coding isn't just about writing code. It's about <b>taking something that doesn't exist yet and turning it into something that can be used.</b>",
+    "beyondTitle": "Beyond the code",
+    "beyondIntro": "I'm still building my path.",
+    "beyondParagraph": "I want to keep learning, experiment with new technologies, and take on bigger projects. I want to reach the point where an idea doesn't just sit in a folder called <code>final_project_v7_actually_final_final</code> 💀, but turns into a real solution.",
+    "beyondClosing": "This portfolio is part of that process.",
+    "beyondPullQuote": "It doesn't represent everything I know. It represents everything I'm building toward knowing more.",
+    "focusLabel": "Currently focused on",
+    "chips": [
+      "App development",
+      "Management systems",
+      "Databases",
+      "Process automation",
+      "Application architecture",
+      "Building MVPs"
+    ]
+  },
+  "Skills": {
+    "eyebrow": "Skills",
+    "title": "What I build with",
+    "intro": "It's not about collecting technologies. It's about knowing enough tools to turn an idea into a working solution, and keep learning when a project calls for something new.",
+    "groupDevelopment": "Development",
+    "levelLabel": "Familiarity",
+    "groupData": "Data & version control",
+    "groupEnvironment": "Environment & tools",
+    "groupApproaches": "What I'm building as a developer",
+    "descriptions": {
+      "html5": "Web structure and semantics.",
+      "css3": "Responsive design, layouts and visual experiences.",
+      "javascript": "Logic, interaction and feature development.",
+      "python": "Automation, logic and application development.",
+      "php": "Backend development and web applications.",
+      "sql": "Querying, manipulating and organizing data.",
+      "mysql": "Designing and managing relational databases.",
+      "git": "Version control and tracking development.",
+      "github": "Repositories, documentation and collaboration.",
+      "vscode": "My main environment for building and experimenting.",
+      "wordpress": "Building and customizing websites.",
+      "excel": "Organizing, analyzing and handling information.",
+      "tns": "Managing and working with business information."
+    },
+    "approaches": {
+      "mvp": {
+        "title": "MVP development",
+        "description": "I turn an idea into a first working version so I can test it, find issues and evolve it."
+      },
+      "requirements": {
+        "title": "Requirements analysis",
+        "description": "I try to first understand what problem exists, who has it and what the solution should solve."
+      },
+      "databaseDesign": {
+        "title": "Database design",
+        "description": "I organize information with consistency, relationships and maintainability in mind."
+      },
+      "automation": {
+        "title": "Automation",
+        "description": "I look for opportunities to turn repetitive processes into faster, more reliable workflows."
+      },
+      "problemSolving": {
+        "title": "Problem solving",
+        "description": "I break big problems down into small parts that can be understood, tested and solved."
+      },
+      "architecture": {
+        "title": "Application architecture",
+        "description": "I'm building my ability to think beyond a single feature and understand how the different parts of an app work together."
+      },
+      "documentation": {
+        "title": "Technical documentation",
+        "description": "I record decisions, processes and how things work so a project can be understood even after it's built."
+      }
+    },
+    "learningLabel": "Currently learning",
+    "learningItems": [
+      "App development",
+      "Software architecture",
+      "Backend",
+      "Databases",
+      "Automation"
+    ],
+    "learningQuote": "I don't want to learn tools just to fill up a list. I want to learn them because some project made me need them."
+  },
+  "Contact": {
+    "eyebrow": "Contact",
+    "title": "Let's talk",
+    "direct": {
+      "heading": "Let's talk?",
+      "description": "Write to me if you have a project, an idea, an opportunity, or just want to get in touch.",
+      "emailLabel": "Email",
+      "githubLabel": "GitHub",
+      "linkedinLabel": "LinkedIn",
+      "whatsappLabel": "WhatsApp",
+      "cta": "Send me an email"
+    },
+    "form": {
+      "heading": "Send me a message",
+      "nameLabel": "Name",
+      "namePlaceholder": "Your name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@email.com",
+      "subjectLabel": "Subject",
+      "subjectPlaceholder": "What's this about?",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Tell me what you're thinking...",
+      "submit": "Send message",
+      "submitting": "Sending...",
+      "successTitle": "Message sent!",
+      "successDescription": "Thanks for writing. I'll get back to you as soon as I can.",
+      "sendAnother": "Send another message",
+      "errorTitle": "Something went wrong",
+      "errorDescription": "The message couldn't be sent. Try again or email me directly.",
+      "errors": {
+        "nameRequired": "Enter your name.",
+        "emailRequired": "Enter your email address.",
+        "emailInvalid": "That email doesn't look valid.",
+        "subjectRequired": "Enter a subject.",
+        "messageRequired": "Write your message.",
+        "messageTooShort": "Tell me a bit more (10 characters minimum)."
+      }
+    }
+  },
+  "FeaturedProject": {
+    "badge": "Featured Project",
+    "cta": "View project"
+  },
+  "Projects": {
+    "title": "Featured Projects",
+    "subtitle": "Digital solutions built with modern technologies and a focus on user experience.",
+    "filterAll": "All",
+    "filterWeb": "Web Apps",
+    "filterTools": "Tools",
+    "filterDesign": "Design",
+    "filterFullstack": "Full Stack",
+    "filterResearch": "Research",
+    "cta": "View details",
+    "viewAll": "View all projects",
+    "noResults": "I don't have a published project in this category yet.",
+    "status": {
+      "mvp": "MVP",
+      "finished": "Finished",
+      "inDevelopment": "In development",
+      "proposal": "Proposal"
+    }
+  },
+  "ProjectData": {
+    "portfolio": {
+      "title": "Personal Portfolio",
+      "description": "Own design, direction and development: a responsive portfolio with an about section, skills, projects and contact, built to learn how to take an idea all the way to a production-ready app.",
+      "tagline": "My space to build, experiment and show what I'm learning.",
+      "status": "Finished · Deployable",
+      "whatIBuilt": [
+        "Responsive personal site.",
+        "Personal introduction and learning path.",
+        "Skills and technologies section.",
+        "Project showcase.",
+        "Contact section.",
+        "Design adapted for mobile and desktop.",
+        "Interface animations and interactions.",
+        "Structure ready to deploy to production."
+      ],
+      "participation": "Design, direction and development of the project. I used AI-assisted development tools as support during implementation, but the decisions about structure, features, design and behavior come from my own instructions and judgment.",
+      "demonstrates": "This project represents my ability to take an idea, define how I want it to work, and turn it into a real application. It's also a way of showing that I'm not learning technologies in isolation: I'm learning to integrate them into a complete project."
+    },
+    "hardwareMarketplace": {
+      "title": "Hardware Marketplace",
+      "description": "A platform to sell components and assemblies, with a cost estimator, assembler profiles, accounts with reviews, and the option of in-person support."
+    },
+    "hardwareStore": {
+      "title": "Hardware Store",
+      "description": "A site to sell our own products and spare parts, built to stay transparent with the customer and backed by AI support for questions."
+    },
+    "weatherApp": {
+      "title": "Weather App",
+      "description": "A weather app that pulls from an external API and changes its visualization based on the time and moment of the day."
+    },
+    "legalResearch": {
+      "title": "Software Analysis for Lawyers",
+      "description": "Research into an alternative to Icarus: interviews and surveys via Google Forms to understand what lawyers actually need from software like that.",
+      "tags": [
+        "Google Forms",
+        "Requirements analysis",
+        "Research",
+        "Comparative analysis"
+      ]
+    }
+  },
+  "ProjectDetail": {
+    "back": "Back to projects",
+    "languagesLabel": "Languages",
+    "howLabel": "How I built it",
+    "whatBuiltLabel": "What I built",
+    "demonstratesLabel": "What this shows",
+    "solo": "Solo work",
+    "team": "Team work",
+    "teamOf": "Team of {count} people"
+  },
+  "Footer": {
+    "tagline": "My space to build, experiment and show what I'm learning.",
+    "navLabel": "Navigation",
+    "connectLabel": "Connect",
+    "madeWith": "Made with Next.js, Tailwind CSS and Framer Motion.",
+    "rights": "All rights reserved."
+  },
+  "BackToTop": {
+    "label": "Back to top"
+  }
+}

@@ -1,0 +1,282 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #eaf6ff;
+  --foreground: #0f172a;
+  --background-gradient: linear-gradient(
+    180deg,
+    #bfe3ff 0%,
+    #d9f0ff 28%,
+    #eef7ff 58%,
+    #f5faff 100%
+  );
+  --nebula-a: rgba(191, 227, 255, 0.6);
+  --nebula-b: rgba(255, 244, 214, 0.5);
+  --nebula-c: rgba(255, 255, 255, 0.45);
+  --nebula-core: rgba(255, 214, 140, 0.32);
+  --star-color: 79, 70, 229;
+  --star-max-alpha: 0.72;
+  --vignette: radial-gradient(
+    ellipse at center,
+    transparent 58%,
+    rgba(191, 219, 254, 0.22) 100%
+  );
+  --horizon-glow: transparent;
+  --card-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+:root.dark {
+  --background: #04060c;
+  --foreground: #f1f5f9;
+  --background-gradient: linear-gradient(
+    180deg,
+    #05070f 0%,
+    #04060c 40%,
+    #020307 100%
+  );
+  --nebula-a: rgba(139, 92, 246, 0.46);
+  --nebula-b: rgba(56, 189, 248, 0.38);
+  --nebula-c: rgba(16, 185, 129, 0.22);
+  --nebula-core: rgba(251, 191, 36, 0.18);
+  --star-color: 255, 255, 255;
+  --star-max-alpha: 0.95;
+  --vignette: radial-gradient(
+    ellipse at center,
+    transparent 38%,
+    rgba(1, 2, 6, 0.65) 100%
+  );
+  --horizon-glow: linear-gradient(
+    to top,
+    rgba(56, 189, 248, 0.22),
+    rgba(94, 234, 212, 0.08) 45%,
+    transparent 100%
+  );
+  --card-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+html {
+  scroll-padding-top: 5rem;
+}
+
+body {
+  /* background-attachment: fixed ties the gradient to the viewport
+     instead of the full page height. The page can be several thousand
+     pixels tall, and stretching a gradient between close pastel colors
+     across that whole span produces visible 8-bit banding ("hard seams")
+     partway down — anchoring it to the viewport keeps the interpolation
+     range small enough to stay smooth, and reads as a proper sky instead
+     of a strip of color scrolling past. */
+  background: var(--background-gradient);
+  background-attachment: fixed;
+  color: var(--foreground);
+  overflow-x: hidden;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* ---------- Animated galaxy backdrop ---------- */
+
+.galaxy-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -20;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.galaxy-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.nebula-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  will-change: transform, opacity;
+}
+
+.nebula-a {
+  top: -12%;
+  left: -8%;
+  width: 55vw;
+  height: 55vw;
+  background: var(--nebula-a);
+  animation: nebula-drift-a 28s ease-in-out infinite;
+}
+
+.nebula-b {
+  top: -5%;
+  right: -10%;
+  width: 48vw;
+  height: 48vw;
+  background: var(--nebula-b);
+  animation: nebula-drift-b 34s ease-in-out infinite;
+}
+
+.nebula-c {
+  bottom: -15%;
+  left: 20%;
+  width: 50vw;
+  height: 50vw;
+  background: var(--nebula-c);
+  animation: nebula-drift-c 24s ease-in-out infinite;
+}
+
+/* A warm, distant "galactic core" glow — smaller and brighter than the
+   other nebulae, breathing slowly for a sense of a live, deep sky. */
+.nebula-core {
+  top: 30%;
+  left: 62%;
+  width: 26vw;
+  height: 26vw;
+  background: var(--nebula-core);
+  filter: blur(70px);
+  animation: nebula-pulse 12s ease-in-out infinite;
+}
+
+.galaxy-vignette {
+  position: absolute;
+  inset: 0;
+  background: var(--vignette);
+}
+
+/* Soft glow pooling at the bottom of the viewport, like aurora light
+   reflected off a lake — anchors the "aurora over a lake" concept. Light
+   mode leaves --horizon-glow transparent and uses the meadow below instead. */
+.galaxy-horizon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 38vh;
+  background: var(--horizon-glow);
+}
+
+/* Light-mode-only decoration: a soft rolling meadow anchored to the
+   bottom of the viewport, part of the fixed "paradise sky" scene —
+   four overlapping hill shapes in different greens, the nearest one
+   speckled with tiny wildflowers. Hidden entirely in dark mode. */
+.meadow-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+:root.dark .meadow-wrap {
+  display: none;
+}
+
+.meadow-hill {
+  position: absolute;
+  border-radius: 50% 50% 0 0;
+}
+
+.meadow-hill-far {
+  left: 25%;
+  bottom: -12vh;
+  width: 60vw;
+  height: 18vh;
+  background: linear-gradient(180deg, rgba(184, 224, 160, 0.7), rgba(142, 198, 120, 0.78));
+}
+
+.meadow-hill-back {
+  left: -15%;
+  bottom: -8vh;
+  width: 75vw;
+  height: 20vh;
+  background: linear-gradient(180deg, rgba(163, 214, 140, 0.85), rgba(120, 185, 105, 0.92));
+}
+
+.meadow-hill-mid {
+  right: -20%;
+  bottom: -10vh;
+  width: 85vw;
+  height: 24vh;
+  background: linear-gradient(180deg, rgba(150, 205, 125, 0.88), rgba(102, 168, 90, 0.94));
+}
+
+.meadow-hill-front {
+  left: 10%;
+  bottom: -14vh;
+  width: 95vw;
+  height: 28vh;
+  background-image:
+    radial-gradient(circle 3px at 8% 24%, #ffffff, transparent 65%),
+    radial-gradient(circle 3px at 20% 42%, #fef08a, transparent 65%),
+    radial-gradient(circle 2.5px at 35% 20%, #ffffff, transparent 65%),
+    radial-gradient(circle 3px at 48% 46%, #fef08a, transparent 65%),
+    radial-gradient(circle 2.5px at 62% 28%, #ffffff, transparent 65%),
+    radial-gradient(circle 3px at 76% 44%, #fef08a, transparent 65%),
+    radial-gradient(circle 2.5px at 88% 22%, #ffffff, transparent 65%),
+    radial-gradient(circle 2.5px at 95% 40%, #fef08a, transparent 65%),
+    linear-gradient(180deg, rgba(134, 197, 112, 0.92), rgba(82, 150, 75, 0.96));
+  box-shadow: inset 0 3px 0 rgba(255, 244, 214, 0.35);
+}
+
+@keyframes nebula-drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(5%, 6%) scale(1.1);
+  }
+}
+
+@keyframes nebula-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-6%, 5%) scale(1.06);
+  }
+}
+
+@keyframes nebula-drift-c {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(4%, -5%) scale(1.08);
+  }
+}
+
+@keyframes nebula-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nebula-a,
+  .nebula-b,
+  .nebula-c,
+  .nebula-core {
+    animation: none;
+  }
+}

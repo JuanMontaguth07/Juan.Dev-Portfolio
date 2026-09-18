@@ -1,0 +1,12 @@
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.199:3000
+- Environments: .env.local
+✓ Ready in 1635ms
+✓ Running next.config.ts took 60ms
+
+○ Compiling /[locale] ...
+ GET /es 200 in 3.8s (next.js: 1128ms, proxy.ts: 10ms, generate-params: 1676ms, application-code: 959ms)
+ GET /es 200 in 6.2s (next.js: 4.6s, proxy.ts: 219ms, generate-params: 493ms, application-code: 953ms)
+ POST /api/contact 200 in 790ms (next.js: 294ms, application-code: 496ms)
+ GET /es 200 in 2.3s (next.js: 32ms, proxy.ts: 24ms, generate-params: 1343ms, application-code: 876ms)
