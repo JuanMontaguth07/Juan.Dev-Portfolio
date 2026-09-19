@@ -22,9 +22,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Juan.Dev — Full Stack Developer",
+  title: "Juan.Dev",
   description:
-    "Portfolio of Juan Dev, a full stack developer building immersive, cinematic web experiences.",
+    "Portafolio de Juan Diego Montaguth Rodríguez: desarrollo web, proyectos y contacto.",
 };
 
 export function generateStaticParams() {
