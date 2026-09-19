@@ -50,7 +50,8 @@ export async function POST(request: Request) {
   }
 
   try {
-    const resend = new Resend(apiKey.trim());
+    // Env values pasted into dashboards often pick up stray whitespace.
+    const resend = new Resend(apiKey.trim().split(/\s+/)[0]);
     const { error } = await resend.emails.send({
       from: "Portafolio <onboarding@resend.dev>",
       to: siteConfig.email,
@@ -75,11 +76,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("Contact form send failed", err);
+    // Never echo err.message back: it can contain the API key itself.
     return NextResponse.json(
-      {
-        error: "Failed to send the message.",
-        detail: err instanceof Error ? err.message : String(err),
-      },
+      { error: "Failed to send the message." },
       { status: 500 },
     );
   }
