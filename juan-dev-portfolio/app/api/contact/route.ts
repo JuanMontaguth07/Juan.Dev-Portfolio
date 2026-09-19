@@ -49,9 +49,8 @@ export async function POST(request: Request) {
     );
   }
 
-  const resend = new Resend(apiKey);
-
   try {
+    const resend = new Resend(apiKey.trim());
     const { error } = await resend.emails.send({
       from: "Portafolio <onboarding@resend.dev>",
       to: siteConfig.email,
@@ -68,7 +67,7 @@ export async function POST(request: Request) {
     if (error) {
       console.error("Resend error", error);
       return NextResponse.json(
-        { error: "Failed to send the message." },
+        { error: "Failed to send the message.", detail: error.message },
         { status: 502 },
       );
     }
@@ -77,7 +76,10 @@ export async function POST(request: Request) {
   } catch (err) {
     console.error("Contact form send failed", err);
     return NextResponse.json(
-      { error: "Failed to send the message." },
+      {
+        error: "Failed to send the message.",
+        detail: err instanceof Error ? err.message : String(err),
+      },
       { status: 500 },
     );
   }
