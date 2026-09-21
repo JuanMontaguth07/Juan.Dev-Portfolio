@@ -3,6 +3,56 @@
     "description": "Portfólio de Juan Diego Montaguth Rodríguez: desenvolvimento web, projetos e contato.",
     "ogSubtitle": "Tecnólogo em Análise e Desenvolvimento de Software"
   },
+  "Journey": {
+    "eyebrow": "Trajetória",
+    "title": "Formação e experiência",
+    "subtitle": "O que estudo e o que já construí até agora, baseado em projetos reais.",
+    "educationLabel": "Educação",
+    "experienceLabel": "Experiência baseada em projetos",
+    "languagesLabel": "Idiomas",
+    "professionalLabel": "Habilidades profissionais",
+    "education": {
+      "period": "Conclusão prevista: 2026",
+      "title": "Tecnólogo em Análise e Desenvolvimento de Software",
+      "org": "SENA · Cúcuta, Colômbia",
+      "tag": "Em formação"
+    },
+    "experience": [
+      {
+        "period": "Março 2024 – 2026",
+        "title": "Desenvolvedor Web · Projeto formativo SAYFER",
+        "org": "SENA",
+        "description": "Sistema de gestão avícola para controle de estoque e produção: registro de alimentação, medicamentos e mortalidade, com banco de dados e lógica de negócio pensada para um ambiente real."
+      },
+      {
+        "period": "Outubro 2025",
+        "title": "Desenvolvedor Web · Página do clima",
+        "org": "Projeto pessoal",
+        "description": "Aplicação web para consultar as condições climáticas: consumo de dados dinâmicos e uma interface clara, com foco na experiência do usuário."
+      },
+      {
+        "period": "Desde abril 2026",
+        "title": "Desenvolvedor Web · Plataforma de suporte em hardware",
+        "org": "Projeto em equipe",
+        "description": "Site para orientar na escolha de componentes: design focado em clareza e utilidade, com conteúdo técnico acessível."
+      }
+    ],
+    "languages": [
+      { "name": "Espanhol", "level": "Nativo" },
+      { "name": "Inglês", "level": "Intermediário avançado (B2)" },
+      { "name": "Alemão", "level": "Básico (A1)" },
+      { "name": "Português", "level": "Básico (A1)" }
+    ],
+    "professional": [
+      "Resolução de problemas",
+      "Trabalho em equipe",
+      "Liderança",
+      "Adaptabilidade",
+      "Trabalho sob pressão",
+      "Organização e pensamento estruturado",
+      "Metodologias ágeis (Scrum)"
+    ]
+  },
   "Nav": {
     "home": "Início",
     "about": "Sobre",

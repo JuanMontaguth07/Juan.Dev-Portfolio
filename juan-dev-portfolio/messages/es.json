@@ -3,6 +3,56 @@
     "description": "Portafolio de Juan Diego Montaguth Rodríguez: desarrollo web, proyectos y contacto.",
     "ogSubtitle": "Tecnólogo en Análisis y Desarrollo de Software"
   },
+  "Journey": {
+    "eyebrow": "Trayectoria",
+    "title": "Formación y experiencia",
+    "subtitle": "Lo que estudio y lo que he construido hasta ahora, basado en proyectos reales.",
+    "educationLabel": "Educación",
+    "experienceLabel": "Experiencia basada en proyectos",
+    "languagesLabel": "Idiomas",
+    "professionalLabel": "Habilidades profesionales",
+    "education": {
+      "period": "Finalización estimada: 2026",
+      "title": "Tecnólogo en Análisis y Desarrollo de Software",
+      "org": "SENA · Cúcuta, Colombia",
+      "tag": "En formación"
+    },
+    "experience": [
+      {
+        "period": "Marzo 2024 – 2026",
+        "title": "Desarrollador Web · Proyecto formativo SAYFER",
+        "org": "SENA",
+        "description": "Sistema de gestión avícola para el control de inventario y producción: registro de alimentación, medicamentos y mortalidad, con base de datos y lógica de negocio pensada para un entorno real."
+      },
+      {
+        "period": "Octubre 2025",
+        "title": "Desarrollador Web · Página del clima",
+        "org": "Proyecto personal",
+        "description": "Aplicación web para consultar las condiciones climáticas: consumo de datos dinámicos y una interfaz clara, con enfoque en la experiencia de usuario."
+      },
+      {
+        "period": "Desde abril 2026",
+        "title": "Desarrollador Web · Plataforma de soporte en hardware",
+        "org": "Proyecto en equipo",
+        "description": "Sitio web para asesorar en la selección de componentes: diseño enfocado en claridad y utilidad, con contenido técnico accesible."
+      }
+    ],
+    "languages": [
+      { "name": "Español", "level": "Nativo" },
+      { "name": "Inglés", "level": "Intermedio alto (B2)" },
+      { "name": "Alemán", "level": "Básico (A1)" },
+      { "name": "Portugués", "level": "Básico (A1)" }
+    ],
+    "professional": [
+      "Resolución de problemas",
+      "Trabajo en equipo",
+      "Liderazgo",
+      "Adaptabilidad",
+      "Trabajo bajo presión",
+      "Organización y pensamiento estructurado",
+      "Metodologías ágiles (Scrum)"
+    ]
+  },
   "Nav": {
     "home": "Inicio",
     "about": "Sobre mí",

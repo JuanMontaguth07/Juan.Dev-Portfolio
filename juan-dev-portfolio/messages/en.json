@@ -3,6 +3,56 @@
     "description": "Portfolio of Juan Diego Montaguth Rodríguez: web development, projects and contact.",
     "ogSubtitle": "Software Analysis and Development technologist"
   },
+  "Journey": {
+    "eyebrow": "Journey",
+    "title": "Education and experience",
+    "subtitle": "What I study and what I've built so far, based on real projects.",
+    "educationLabel": "Education",
+    "experienceLabel": "Project-based experience",
+    "languagesLabel": "Languages",
+    "professionalLabel": "Professional skills",
+    "education": {
+      "period": "Expected completion: 2026",
+      "title": "Technologist in Software Analysis and Development",
+      "org": "SENA · Cúcuta, Colombia",
+      "tag": "In progress"
+    },
+    "experience": [
+      {
+        "period": "March 2024 – 2026",
+        "title": "Web Developer · SAYFER training project",
+        "org": "SENA",
+        "description": "Poultry management system for inventory and production control: logging of feeding, medication and mortality, with a database and business logic designed for a real environment."
+      },
+      {
+        "period": "October 2025",
+        "title": "Web Developer · Weather app",
+        "org": "Personal project",
+        "description": "Web application to check weather conditions: dynamic data consumption and a clear interface, with a focus on user experience."
+      },
+      {
+        "period": "Since April 2026",
+        "title": "Web Developer · Hardware support platform",
+        "org": "Team project",
+        "description": "Website that advises on choosing components: design focused on clarity and usefulness, with accessible technical content."
+      }
+    ],
+    "languages": [
+      { "name": "Spanish", "level": "Native" },
+      { "name": "English", "level": "Upper intermediate (B2)" },
+      { "name": "German", "level": "Basic (A1)" },
+      { "name": "Portuguese", "level": "Basic (A1)" }
+    ],
+    "professional": [
+      "Problem solving",
+      "Teamwork",
+      "Leadership",
+      "Adaptability",
+      "Working under pressure",
+      "Organization and structured thinking",
+      "Agile methodologies (Scrum)"
+    ]
+  },
   "Nav": {
     "home": "Home",
     "about": "About",
