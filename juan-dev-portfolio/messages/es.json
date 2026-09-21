@@ -13,11 +13,11 @@
     "closeMenu": "Cerrar menú"
   },
   "Hero": {
-    "badge": "Desarrollador Full Stack",
+    "badge": "Desarrollador Web",
     "greeting": "Hola, soy",
     "firstName": "Juan Diego",
     "lastName": "Montaguth Rodríguez",
-    "description": "Creo experiencias digitales premium con código, diseño y movimiento. Construyo interfaces inmersivas, cinematográficas y funcionales para marcas y productos modernos.",
+    "description": "Construyo aplicaciones web y sistemas de gestión con JavaScript, PHP y bases de datos, y me gusta convertir una idea en algo que funcione. Estudio Análisis y Desarrollo de Software en el SENA y aprendo construyendo proyectos reales.",
     "ctaProjects": "Ver mis proyectos",
     "ctaCv": "Descargar CV",
     "ctaEmailLabel": "Enviar correo"
