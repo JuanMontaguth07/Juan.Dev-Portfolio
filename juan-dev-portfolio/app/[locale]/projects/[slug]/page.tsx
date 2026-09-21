@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { ArrowLeft, Check, User, Users } from "lucide-react";
+import { ArrowLeft, Check, ExternalLink, User, Users } from "lucide-react";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { GithubIcon } from "@/components/icons/brand-icons";
 import { ProjectLanguageBar } from "@/components/project-language-bar";
 import { ProjectStatusBadge } from "@/components/project-status-badge";
 import { Reveal } from "@/components/reveal";
@@ -160,6 +161,33 @@ export default async function ProjectDetailPage(
           <p className="mt-5 text-base leading-relaxed text-slate-600 dark:text-zinc-300">
             {t(`${key}.demonstrates`)}
           </p>
+        </Reveal>
+      )}
+
+      {project.links && (
+        <Reveal delay={0.28} className="mt-12 flex flex-wrap gap-3">
+          {project.links.demo && (
+            <a
+              href={project.links.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-linear-to-r from-cyan-500 to-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-xl shadow-cyan-500/25 transition-transform hover:scale-[1.03] dark:from-cyan-400 dark:to-blue-600 dark:shadow-cyan-400/40"
+            >
+              <ExternalLink className="h-4 w-4" />
+              {td("viewDemo")}
+            </a>
+          )}
+          {project.links.repo && (
+            <a
+              href={project.links.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-black/15 px-6 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-black/5 dark:border-white/15 dark:text-zinc-200 dark:hover:bg-white/5"
+            >
+              <GithubIcon className="h-4 w-4" />
+              {td("viewCode")}
+            </a>
+          )}
         </Reveal>
       )}
 

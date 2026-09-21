@@ -32,6 +32,8 @@ export type Project = {
   collaboration?: "solo" | "team";
   /** Only set when a specific headcount was confirmed. */
   teamSize?: number;
+  /** Public links, shown on the detail page only when real ones exist. */
+  links?: { repo?: string; demo?: string };
 };
 
 /**
@@ -54,6 +56,10 @@ export const featuredProject: Project = {
     { name: "JavaScript", percent: 1, color: "#f1e05a" },
   ],
   collaboration: "solo",
+  links: {
+    repo: "https://github.com/JuanMontaguth07/Juan.Dev-Portfolio",
+    demo: "https://juandevportfolio.vercel.app",
+  },
 };
 
 const sayfer: Project = {

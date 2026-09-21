@@ -260,6 +260,8 @@
   },
   "ProjectDetail": {
     "back": "Zurück zu den Projekten",
+    "viewDemo": "Live-Demo ansehen",
+    "viewCode": "Code ansehen",
     "languagesLabel": "Sprachen",
     "howLabel": "Wie ich es gebaut habe",
     "whatBuiltLabel": "Was ich gebaut habe",

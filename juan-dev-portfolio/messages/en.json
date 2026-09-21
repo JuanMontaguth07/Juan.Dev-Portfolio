@@ -260,6 +260,8 @@
   },
   "ProjectDetail": {
     "back": "Back to projects",
+    "viewDemo": "View live demo",
+    "viewCode": "View code",
     "languagesLabel": "Languages",
     "howLabel": "How I built it",
     "whatBuiltLabel": "What I built",

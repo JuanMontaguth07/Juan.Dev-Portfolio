@@ -1,13 +1,14 @@
 import { CircleCheckBig, Gem, Heart, Package } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Reveal } from "@/components/reveal";
+import { projects } from "@/data/projects";
 import { cn, glassCard } from "@/lib/utils";
 
 export function StatsRow() {
   const t = useTranslations("Stats");
 
   const stats = [
-    { icon: Package, value: "+5", label: t("projects") },
+    { icon: Package, value: `+${projects.length}`, label: t("projects") },
     { icon: Gem, value: "1", label: t("experience") },
     { icon: CircleCheckBig, value: "100%", label: t("commitment") },
     { icon: Heart, value: "∞", label: t("passion") },
