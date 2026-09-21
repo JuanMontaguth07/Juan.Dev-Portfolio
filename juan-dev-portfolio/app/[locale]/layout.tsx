@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { hasLocale } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { siteConfig } from "@/lib/site-config";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { BackToTop } from "@/components/back-to-top";
@@ -22,11 +24,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Juan.Dev",
-  description:
-    "Portafolio de Juan Diego Montaguth Rodríguez: desarrollo web, proyectos y contacto.",
-};
+export async function generateMetadata({
+  params,
+}: LayoutProps<"/[locale]">): Promise<Metadata> {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) return {};
+
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return {
+    metadataBase: new URL(siteConfig.url),
+    title: { default: "Juan.Dev", template: "%s · Juan.Dev" },
+    description: t("description"),
+    authors: [{ name: "Juan Diego Montaguth Rodríguez" }],
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

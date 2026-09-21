@@ -1,5 +1,7 @@
 /** Single source of truth for personal contact links. */
 export const siteConfig = {
+  /** Public origin; used for canonical URLs, the sitemap and social previews. */
+  url: "https://juandevportfolio.vercel.app",
   email: "juandiegomontaguth@gmail.com",
   github: "https://github.com/JuanMontaguth07",
   linkedin:

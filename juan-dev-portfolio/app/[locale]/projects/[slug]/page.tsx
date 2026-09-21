@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { ArrowLeft, Check, User, Users } from "lucide-react";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
@@ -9,10 +10,27 @@ import { ProjectStatusBadge } from "@/components/project-status-badge";
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
 import { projects } from "@/data/projects";
+import { pageMetadata } from "@/lib/seo";
 import { cn, glassCard } from "@/lib/utils";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/[locale]/projects/[slug]">): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
+  if (!hasLocale(routing.locales, locale) || !project) return {};
+
+  const t = await getTranslations({ locale, namespace: "ProjectData" });
+  return pageMetadata({
+    locale,
+    path: `/projects/${slug}`,
+    title: t(`${project.messageKey}.title`),
+    description: t(`${project.messageKey}.description`),
+  });
 }
 
 export default async function ProjectDetailPage(

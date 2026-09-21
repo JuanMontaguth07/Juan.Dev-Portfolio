@@ -1,11 +1,28 @@
+import type { Metadata } from "next";
 import { ArrowLeft } from "lucide-react";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { pageMetadata } from "@/lib/seo";
 import { ProjectsGrid } from "@/components/projects-grid";
 import { Reveal } from "@/components/reveal";
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/[locale]/projects">): Promise<Metadata> {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) return {};
+
+  const t = await getTranslations({ locale, namespace: "Projects" });
+  return pageMetadata({
+    locale,
+    path: "/projects",
+    title: t("allTitle"),
+    description: t("subtitle"),
+  });
+}
 
 export default async function AllProjectsPage(
   props: PageProps<"/[locale]/projects">,
