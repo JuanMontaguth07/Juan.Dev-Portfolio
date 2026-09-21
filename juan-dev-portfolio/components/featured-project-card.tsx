@@ -52,9 +52,9 @@ export function FeaturedProjectCard() {
         )}
       </div>
 
-      <h3 className="mt-5 text-xl font-semibold text-slate-900 dark:text-white">
+      <h2 className="mt-5 text-xl font-semibold text-slate-900 dark:text-white">
         {title}
-      </h3>
+      </h2>
       <p className="mt-2 text-sm text-slate-600 dark:text-zinc-300">
         {description}
       </p>

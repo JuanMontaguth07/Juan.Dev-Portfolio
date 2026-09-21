@@ -74,6 +74,7 @@ const sayfer: Project = {
   collaboration: "team",
   // Confirmed: the user plus 4 other people.
   teamSize: 5,
+  links: { repo: "https://github.com/angel-DSM/Sayfer" },
 };
 
 const hardwareMarketplace: Project = {
@@ -109,6 +110,7 @@ const weatherApp: Project = {
   status: "finished",
   image: "/images/projects/weather-app.png",
   collaboration: "solo",
+  links: { repo: "https://github.com/JuanMontaguth07/weather-app-test" },
 };
 
 const legalResearch: Project = {

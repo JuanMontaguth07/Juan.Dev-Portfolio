@@ -293,7 +293,12 @@ export function GalaxyBackground() {
 
     let width = 0;
     let height = 0;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Phones get a lighter scene: the sky is soft anyway, so full-density
+    // pixels, 60fps and the full particle count are wasted main-thread time.
+    const isSmall = window.matchMedia("(max-width: 767px)").matches;
+    const dpr = isSmall ? 1 : Math.min(window.devicePixelRatio || 1, 2);
+    const minFrameGap = isSmall ? 33 : 0;
+    let lastFrameAt = 0;
     let stars: Star[] = [];
     let dust: Dust[] = [];
     let galaxies: DistantGalaxy[] = [];
@@ -340,7 +345,7 @@ export function GalaxyBackground() {
     let burstRemaining = 0;
 
     function seedStars() {
-      const total = Math.max(110, Math.min(260, Math.floor((width * height) / 8000)));
+      const total = Math.max(isSmall ? 70 : 110, Math.min(260, Math.floor((width * height) / 8000)));
       const bandCos = Math.cos(BAND_ANGLE);
       const bandSin = Math.sin(BAND_ANGLE);
       const next: Star[] = [];
@@ -398,7 +403,7 @@ export function GalaxyBackground() {
     }
 
     function seedDust() {
-      const count = Math.max(120, Math.min(300, Math.floor((width * height) / 4200)));
+      const count = Math.max(isSmall ? 60 : 120, Math.min(300, Math.floor((width * height) / 4200)));
       const next: Dust[] = [];
       for (let i = 0; i < count; i++) {
         next.push({
@@ -990,6 +995,12 @@ export function GalaxyBackground() {
     }
 
     function draw(now: number) {
+      if (minFrameGap && now - lastFrameAt < minFrameGap) {
+        frame = requestAnimationFrame(draw);
+        return;
+      }
+      lastFrameAt = now;
+
       ctx!.clearRect(0, 0, width, height);
 
       // A single bad frame (e.g. a transient CSS custom-property read
@@ -1015,9 +1026,17 @@ export function GalaxyBackground() {
       }
     }
 
-    frame = requestAnimationFrame(draw);
+    // The canvas is decorative, so it waits until the page has loaded and
+    // hydrated: drawing during load competed with the content for the main
+    // thread (and the intro splash hides the sky for the first moments anyway).
+    let started = false;
+    const startTimer = window.setTimeout(() => {
+      started = true;
+      frame = requestAnimationFrame(draw);
+    }, 1200);
 
     function handleVisibility() {
+      if (!started) return;
       if (document.hidden) {
         cancelAnimationFrame(frame);
       } else if (!reduceMotion) {
@@ -1027,6 +1046,7 @@ export function GalaxyBackground() {
     document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
+      window.clearTimeout(startTimer);
       cancelAnimationFrame(frame);
       window.removeEventListener("resize", resize);
       document.removeEventListener("visibilitychange", handleVisibility);
