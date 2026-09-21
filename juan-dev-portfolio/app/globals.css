@@ -36,16 +36,16 @@
     #04060c 40%,
     #020307 100%
   );
-  --nebula-a: rgba(139, 92, 246, 0.46);
-  --nebula-b: rgba(56, 189, 248, 0.38);
-  --nebula-c: rgba(16, 185, 129, 0.22);
-  --nebula-core: rgba(251, 191, 36, 0.18);
+  --nebula-a: rgba(139, 92, 246, 0.3);
+  --nebula-b: rgba(56, 189, 248, 0.24);
+  --nebula-c: rgba(16, 185, 129, 0.14);
+  --nebula-core: rgba(251, 191, 36, 0.12);
   --star-color: 255, 255, 255;
   --star-max-alpha: 0.95;
   --vignette: radial-gradient(
     ellipse at center,
-    transparent 38%,
-    rgba(1, 2, 6, 0.65) 100%
+    transparent 30%,
+    rgba(1, 2, 6, 0.8) 100%
   );
   --horizon-glow: linear-gradient(
     to top,
@@ -280,6 +280,21 @@ body {
   border-radius: 9999px;
   filter: blur(90px);
   will-change: transform, opacity;
+}
+
+/* Night sky only: the blobs are sized in vw, so on a wide monitor they grew
+   to ~800px and washed the whole sky in color, while a phone (55vw ~ 215px)
+   stayed dark. Capping the size keeps the desktop as deep as the phone. */
+:root.dark .nebula-a,
+:root.dark .nebula-b,
+:root.dark .nebula-c {
+  max-width: 560px;
+  max-height: 560px;
+}
+
+:root.dark .nebula-core {
+  max-width: 300px;
+  max-height: 300px;
 }
 
 .nebula-a {

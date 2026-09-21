@@ -56,13 +56,14 @@ type Planet = {
 type DistantGalaxy = {
   x: number;
   y: number;
-  radiusX: number;
-  radiusY: number;
+  radius: number;
+  /** Squash applied to the face-on disc to fake its tilt (1 = face-on). */
+  ratio: number;
   tilt: number;
   rotation: number;
   rotationSpeed: number;
-  core: readonly [number, number, number];
-  arm: readonly [number, number, number];
+  /** Face-on galaxy baked once; the loop only rotates and blits it. */
+  bitmap: HTMLCanvasElement;
 };
 
 type Cloud = {
@@ -137,12 +138,15 @@ const GALAXY_LAYOUT: ReadonlyArray<{
   xRatio: number;
   yRatio: number;
   tilt: number;
+  ratio: number;
+  arms: number;
+  windings: number;
   core: readonly [number, number, number];
   arm: readonly [number, number, number];
 }> = [
-  { xRatio: 0.86, yRatio: 0.14, tilt: -0.5, core: [216, 180, 254], arm: [96, 165, 250] },
-  { xRatio: 0.09, yRatio: 0.74, tilt: 0.42, core: [165, 243, 252], arm: [244, 114, 182] },
-  { xRatio: 0.58, yRatio: 0.9, tilt: -0.22, core: [254, 240, 138], arm: [251, 146, 60] },
+  { xRatio: 0.86, yRatio: 0.14, tilt: -0.5, ratio: 0.42, arms: 2, windings: 0.95, core: [233, 213, 255], arm: [96, 165, 250] },
+  { xRatio: 0.09, yRatio: 0.74, tilt: 0.42, ratio: 0.5, arms: 3, windings: 0.7, core: [186, 246, 253], arm: [244, 114, 182] },
+  { xRatio: 0.58, yRatio: 0.9, tilt: -0.22, ratio: 0.3, arms: 2, windings: 1.15, core: [254, 243, 176], arm: [251, 146, 60] },
 ];
 
 // Flowing aurora curtains near the top of the night sky — drawn as many
@@ -209,6 +213,132 @@ function makePuffs(baseRadius: number) {
     puffs.push({ dx, dy, r });
   }
   return puffs;
+}
+
+/**
+ * Paints one face-on spiral galaxy to an offscreen bitmap: a soft halo, glowing
+ * arms, thousands of tiny stars scattered along logarithmic-ish spirals
+ * (denser and bluer toward the arms, warmer toward the core) and a bright
+ * bulge. Done once per resize; the loop just rotates and draws the bitmap.
+ */
+function renderGalaxyBitmap(
+  radius: number,
+  {
+    arms,
+    windings,
+    core,
+    arm,
+  }: {
+    arms: number;
+    windings: number;
+    core: readonly [number, number, number];
+    arm: readonly [number, number, number];
+  },
+  density: number,
+) {
+  const size = Math.ceil(radius * 2);
+  const bitmap = document.createElement("canvas");
+  bitmap.width = size;
+  bitmap.height = size;
+  const b = bitmap.getContext("2d")!;
+  const cx = size / 2;
+  const cy = size / 2;
+  const [cr, cg, cb] = core;
+  const [ar, ag, ab] = arm;
+
+  const spiral = (armIndex: number, t: number) => {
+    const angle = (armIndex / arms) * Math.PI * 2 + t * windings * Math.PI * 2;
+    const r = radius * (0.05 + 0.93 * t);
+    return { x: cx + Math.cos(angle) * r, y: cy + Math.sin(angle) * r, angle };
+  };
+
+  const halo = b.createRadialGradient(cx, cy, 0, cx, cy, radius);
+  halo.addColorStop(0, `rgba(${cr}, ${cg}, ${cb}, 0.26)`);
+  halo.addColorStop(0.3, `rgba(${ar}, ${ag}, ${ab}, 0.12)`);
+  halo.addColorStop(1, `rgba(${ar}, ${ag}, ${ab}, 0)`);
+  b.fillStyle = halo;
+  b.beginPath();
+  b.arc(cx, cy, radius, 0, Math.PI * 2);
+  b.fill();
+
+  // Soft, tapering glow along each arm.
+  b.lineCap = "round";
+  const segments = 64;
+  for (let a = 0; a < arms; a++) {
+    for (const pass of [
+      { width: radius * 0.14, alpha: 0.05 },
+      { width: radius * 0.06, alpha: 0.09 },
+    ]) {
+      for (let i = 0; i < segments; i++) {
+        const t0 = i / segments;
+        const p0 = spiral(a, t0);
+        const p1 = spiral(a, (i + 1) / segments);
+        b.strokeStyle = `rgba(${ar}, ${ag}, ${ab}, ${pass.alpha * (1 - t0 * 0.85)})`;
+        b.lineWidth = pass.width * (1 - t0 * 0.5);
+        b.beginPath();
+        b.moveTo(p0.x, p0.y);
+        b.lineTo(p1.x, p1.y);
+        b.stroke();
+      }
+    }
+  }
+
+  // Stars: clustered on the arms, with a scatter that grows outward.
+  const perArm = Math.round(radius * 2.4 * density);
+  for (let a = 0; a < arms; a++) {
+    for (let k = 0; k < perArm; k++) {
+      const t = Math.pow(Math.random(), 0.85);
+      const p = spiral(a, t);
+      const spread = radius * (0.02 + 0.1 * t);
+      const off =
+        ((Math.random() + Math.random() + Math.random()) / 3 - 0.5) * 2 * spread;
+      const x = p.x + Math.cos(p.angle + Math.PI / 2) * off;
+      const y = p.y + Math.sin(p.angle + Math.PI / 2) * off;
+
+      const bright = Math.random() < 0.05;
+      const r = Math.round(cr + (ar - cr) * t);
+      const g = Math.round(cg + (ag - cg) * t);
+      const bl = Math.round(cb + (ab - cb) * t);
+      const alpha = (0.25 + Math.random() * 0.55) * (1 - 0.55 * t);
+      const starSize = bright ? 1.1 + Math.random() * 0.9 : 0.35 + Math.random() * 0.75;
+
+      if (bright) {
+        const glow = b.createRadialGradient(x, y, 0, x, y, starSize * 4);
+        glow.addColorStop(0, `rgba(${r}, ${g}, ${bl}, ${alpha * 0.5})`);
+        glow.addColorStop(1, `rgba(${r}, ${g}, ${bl}, 0)`);
+        b.fillStyle = glow;
+        b.beginPath();
+        b.arc(x, y, starSize * 4, 0, Math.PI * 2);
+        b.fill();
+      }
+      b.fillStyle = `rgba(${r}, ${g}, ${bl}, ${Math.min(1, alpha + (bright ? 0.3 : 0))})`;
+      b.beginPath();
+      b.arc(x, y, starSize, 0, Math.PI * 2);
+      b.fill();
+    }
+  }
+
+  // A few field stars filling the disc between the arms.
+  for (let k = 0; k < Math.round(radius * 0.9 * density); k++) {
+    const angle = Math.random() * Math.PI * 2;
+    const r = radius * Math.pow(Math.random(), 0.7) * 0.95;
+    b.fillStyle = `rgba(${cr}, ${cg}, ${cb}, ${0.1 + Math.random() * 0.2})`;
+    b.beginPath();
+    b.arc(cx + Math.cos(angle) * r, cy + Math.sin(angle) * r, 0.35 + Math.random() * 0.4, 0, Math.PI * 2);
+    b.fill();
+  }
+
+  // Bulge and nucleus.
+  const bulge = b.createRadialGradient(cx, cy, 0, cx, cy, radius * 0.24);
+  bulge.addColorStop(0, `rgba(255, 250, 235, 0.9)`);
+  bulge.addColorStop(0.18, `rgba(${cr}, ${cg}, ${cb}, 0.55)`);
+  bulge.addColorStop(1, `rgba(${cr}, ${cg}, ${cb}, 0)`);
+  b.fillStyle = bulge;
+  b.beginPath();
+  b.arc(cx, cy, radius * 0.24, 0, Math.PI * 2);
+  b.fill();
+
+  return bitmap;
 }
 
 /** Bakes a cloud's puffs to an offscreen bitmap once, so the animation
@@ -423,17 +553,16 @@ export function GalaxyBackground() {
 
     function seedGalaxies() {
       galaxies = GALAXY_LAYOUT.map((layout, i) => {
-        const radiusX = Math.max(160, width * 0.17);
+        const radius = Math.max(160, width * 0.18);
         return {
           x: width * layout.xRatio,
           y: height * layout.yRatio,
-          radiusX,
-          radiusY: radiusX * 0.36,
+          radius,
+          ratio: layout.ratio,
           tilt: layout.tilt,
           rotation: i * 1.6,
           rotationSpeed: 0.00012 + i * 0.00004,
-          core: layout.core,
-          arm: layout.arm,
+          bitmap: renderGalaxyBitmap(radius, layout, isSmall ? 0.6 : 1),
         };
       });
     }
@@ -625,52 +754,15 @@ export function GalaxyBackground() {
     }
 
     function drawGalaxy(g: DistantGalaxy) {
-      const [cr, cg, cb] = g.core;
-      const [ar, ag, ab] = g.arm;
-
       if (!reduceMotion) g.rotation += g.rotationSpeed;
 
       ctx!.save();
       ctx!.translate(g.x, g.y);
       ctx!.rotate(g.tilt);
-      ctx!.scale(1, g.radiusY / g.radiusX);
-
-      const body = ctx!.createRadialGradient(0, 0, 0, 0, 0, g.radiusX);
-      body.addColorStop(0, `rgba(${cr}, ${cg}, ${cb}, 0.22)`);
-      body.addColorStop(0.45, `rgba(${ar}, ${ag}, ${ab}, 0.1)`);
-      body.addColorStop(1, `rgba(${ar}, ${ag}, ${ab}, 0)`);
-      ctx!.beginPath();
-      ctx!.fillStyle = body;
-      ctx!.arc(0, 0, g.radiusX, 0, Math.PI * 2);
-      ctx!.fill();
-
+      ctx!.scale(1, g.ratio);
       ctx!.rotate(g.rotation);
-      ctx!.strokeStyle = `rgba(${ar}, ${ag}, ${ab}, 0.16)`;
-      ctx!.lineWidth = Math.max(5, g.radiusX * 0.04);
-      ctx!.lineCap = "round";
-      for (let arm = 0; arm < 2; arm++) {
-        ctx!.save();
-        ctx!.rotate(arm * Math.PI);
-        ctx!.beginPath();
-        ctx!.moveTo(0, 0);
-        ctx!.quadraticCurveTo(
-          g.radiusX * 0.55,
-          g.radiusX * 0.18,
-          g.radiusX * 0.98,
-          g.radiusX * 0.4,
-        );
-        ctx!.stroke();
-        ctx!.restore();
-      }
-
-      const core = ctx!.createRadialGradient(0, 0, 0, 0, 0, g.radiusX * 0.18);
-      core.addColorStop(0, `rgba(${cr}, ${cg}, ${cb}, 0.55)`);
-      core.addColorStop(1, `rgba(${cr}, ${cg}, ${cb}, 0)`);
-      ctx!.beginPath();
-      ctx!.fillStyle = core;
-      ctx!.arc(0, 0, g.radiusX * 0.18, 0, Math.PI * 2);
-      ctx!.fill();
-
+      ctx!.globalAlpha = 0.9;
+      ctx!.drawImage(g.bitmap, -g.radius, -g.radius);
       ctx!.restore();
     }
 
@@ -786,8 +878,8 @@ export function GalaxyBackground() {
         const topY = height * band.baseY + wave;
         const grad = ctx!.createLinearGradient(x, topY, x, topY + curtainHeight);
         grad.addColorStop(0, `rgba(${tr}, ${tg}, ${tb}, 0)`);
-        grad.addColorStop(0.35, `rgba(${tr}, ${tg}, ${tb}, 0.16)`);
-        grad.addColorStop(0.7, `rgba(${mr}, ${mg}, ${mb}, 0.08)`);
+        grad.addColorStop(0.35, `rgba(${tr}, ${tg}, ${tb}, 0.12)`);
+        grad.addColorStop(0.7, `rgba(${mr}, ${mg}, ${mb}, 0.06)`);
         grad.addColorStop(1, `rgba(${mr}, ${mg}, ${mb}, 0)`);
         ctx!.fillStyle = grad;
         ctx!.fillRect(x, topY, step + 1, curtainHeight);
