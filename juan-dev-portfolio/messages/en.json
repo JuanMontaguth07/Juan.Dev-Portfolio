@@ -167,6 +167,7 @@
       "sendAnother": "Send another message",
       "errorTitle": "Something went wrong",
       "errorDescription": "The message couldn't be sent. Try again or email me directly.",
+      "rateLimited": "You've sent several messages in a row. Wait a few minutes and try again, or email me directly.",
       "errors": {
         "nameRequired": "Enter your name.",
         "emailRequired": "Enter your email address.",

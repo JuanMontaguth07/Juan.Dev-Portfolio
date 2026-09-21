@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { ArrowRight, CircleAlert, CircleCheckBig, Loader } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -25,12 +25,18 @@ const EMPTY_VALUES: FormValues = {
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-async function submitContactForm(values: FormValues): Promise<void> {
+class RateLimitedError extends Error {}
+
+async function submitContactForm(
+  values: FormValues,
+  website: string,
+): Promise<void> {
   const res = await fetch("/api/contact", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(values),
+    body: JSON.stringify({ ...values, website }),
   });
+  if (res.status === 429) throw new RateLimitedError("Rate limited");
   if (!res.ok) throw new Error("Request failed");
 }
 
@@ -43,6 +49,9 @@ export function ContactForm() {
   const [values, setValues] = useState<FormValues>(EMPTY_VALUES);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<FormStatus>("idle");
+  const [rateLimited, setRateLimited] = useState(false);
+  // Honeypot: real people never see or fill this field, bots usually do.
+  const [website, setWebsite] = useState("");
 
   function validate(current: FormValues): FormErrors {
     const next: FormErrors = {};
@@ -74,11 +83,13 @@ export function ContactForm() {
     if (Object.keys(validation).length > 0) return;
 
     setStatus("submitting");
+    setRateLimited(false);
     try {
-      await submitContactForm(values);
+      await submitContactForm(values, website);
       setStatus("success");
       setValues(EMPTY_VALUES);
-    } catch {
+    } catch (err) {
+      setRateLimited(err instanceof RateLimitedError);
       setStatus("error");
     }
   }
@@ -111,6 +122,23 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
+      >
+        <label>
+          Website
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+          />
+        </label>
+      </div>
+
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label
@@ -122,6 +150,7 @@ export function ContactForm() {
           <input
             id={`${formId}-name`}
             name="name"
+            maxLength={100}
             type="text"
             autoComplete="name"
             placeholder={t("namePlaceholder")}
@@ -157,6 +186,7 @@ export function ContactForm() {
           <input
             id={`${formId}-email`}
             name="email"
+            maxLength={200}
             type="email"
             autoComplete="email"
             placeholder={t("emailPlaceholder")}
@@ -193,6 +223,7 @@ export function ContactForm() {
         <input
           id={`${formId}-subject`}
           name="subject"
+            maxLength={150}
           type="text"
           placeholder={t("subjectPlaceholder")}
           value={values.subject}
@@ -227,6 +258,7 @@ export function ContactForm() {
         <textarea
           id={`${formId}-message`}
           name="message"
+            maxLength={5000}
           rows={5}
           placeholder={t("messagePlaceholder")}
           value={values.message}
@@ -263,7 +295,7 @@ export function ContactForm() {
               {t("errorTitle")}
             </p>
             <p className="mt-0.5 text-red-600/90 dark:text-red-300/80">
-              {t("errorDescription")}
+              {rateLimited ? t("rateLimited") : t("errorDescription")}
             </p>
           </div>
         </div>

@@ -167,6 +167,7 @@
       "sendAnother": "Weitere Nachricht senden",
       "errorTitle": "Etwas ist schiefgelaufen",
       "errorDescription": "Die Nachricht konnte nicht gesendet werden. Versuch es erneut oder schreib mir direkt per E-Mail.",
+      "rateLimited": "Du hast mehrere Nachrichten hintereinander gesendet. Warte ein paar Minuten und versuche es erneut oder schreib mir direkt per E-Mail.",
       "errors": {
         "nameRequired": "Gib deinen Namen ein.",
         "emailRequired": "Gib deine E-Mail-Adresse ein.",

@@ -167,6 +167,7 @@
       "sendAnother": "Enviar outra mensagem",
       "errorTitle": "Algo deu errado",
       "errorDescription": "Não foi possível enviar a mensagem. Tente novamente ou me escreva diretamente por e-mail.",
+      "rateLimited": "Você enviou várias mensagens seguidas. Aguarde alguns minutos e tente de novo, ou me escreva diretamente por e-mail.",
       "errors": {
         "nameRequired": "Escreva seu nome.",
         "emailRequired": "Escreva seu e-mail.",
