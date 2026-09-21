@@ -60,12 +60,12 @@ export function Navbar() {
           <ul className="hidden items-center gap-8 md:flex">
             {NAV_ITEMS.map((item) => (
               <li key={item}>
-                <a
-                  href={`#${item}`}
+                <Link
+                  href={`/#${item}`}
                   className="text-sm font-medium text-slate-600 transition-colors hover:text-cyan-600 dark:text-zinc-300 dark:hover:text-cyan-400"
                 >
                   {t(item)}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -130,13 +130,13 @@ export function Navbar() {
             <ul className="flex flex-col">
               {NAV_ITEMS.map((item) => (
                 <li key={item}>
-                  <a
-                    href={`#${item}`}
+                  <Link
+                    href={`/#${item}`}
                     onClick={() => setMobileOpen(false)}
                     className="block rounded-xl px-4 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-black/5 hover:text-cyan-600 dark:text-zinc-300 dark:hover:bg-white/5 dark:hover:text-cyan-400"
                   >
                     {t(item)}
-                  </a>
+                  </Link>
                 </li>
               ))}
               <li className="mt-1 flex items-center gap-2 border-t border-black/10 pt-2 sm:hidden dark:border-white/10">

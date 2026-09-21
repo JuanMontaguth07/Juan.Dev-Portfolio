@@ -44,12 +44,12 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5">
               {NAV_ITEMS.map((item) => (
                 <li key={item}>
-                  <a
-                    href={`#${item}`}
+                  <Link
+                    href={`/#${item}`}
                     className="text-sm text-slate-600 transition-colors hover:text-cyan-600 dark:text-zinc-400 dark:hover:text-cyan-400"
                   >
                     {tNav(item)}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

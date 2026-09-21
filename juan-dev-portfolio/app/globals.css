@@ -83,6 +83,52 @@ html {
   animation-timing-function: ease-in-out;
 }
 
+/* Intro splash + route loaders (components/intro-loader.tsx, code-loader.tsx) */
+html[data-intro-seen] .intro-overlay {
+  display: none;
+}
+
+.intro-caret {
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.loader-delay {
+  opacity: 0;
+  animation: loader-in 0.3s ease 0.25s forwards;
+}
+
+@keyframes loader-in {
+  to {
+    opacity: 1;
+  }
+}
+
+.loader-bar {
+  animation: loader-slide 1.2s ease-in-out infinite;
+}
+
+@keyframes loader-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(260%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader-bar {
+    animation: none;
+    width: 100%;
+  }
+}
+
 /* Highlight that sweeps across a skill bar that is at 100%. */
 .bar-shimmer {
   left: 0;

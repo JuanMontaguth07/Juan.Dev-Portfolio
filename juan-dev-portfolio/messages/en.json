@@ -192,6 +192,7 @@
     "filterResearch": "Research",
     "cta": "View details",
     "viewAll": "View all projects",
+    "allTitle": "All my projects",
     "noResults": "I don't have a published project in this category yet.",
     "status": {
       "mvp": "MVP",
