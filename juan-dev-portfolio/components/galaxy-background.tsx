@@ -568,22 +568,35 @@ function renderCloudBitmap(
     bctx.arc(cx, cy + p.r * 0.3, p.r * 1.05, 0, Math.PI * 2);
     bctx.fill();
 
+    // The sun sits upper-right, so each puff's highlight is pushed that way
+    // and warmed; the falloff toward the lower-left picks up a cool tint.
     const grad = bctx.createRadialGradient(
-      cx,
-      cy - p.r * 0.15,
-      p.r * 0.1,
+      cx + p.r * 0.22,
+      cy - p.r * 0.3,
+      p.r * 0.08,
       cx,
       cy,
       p.r,
     );
-    grad.addColorStop(0, "rgba(255, 255, 255, 0.97)");
-    grad.addColorStop(0.7, "rgba(255, 250, 240, 0.75)");
-    grad.addColorStop(1, "rgba(255, 250, 240, 0)");
+    grad.addColorStop(0, "rgba(255, 252, 240, 0.98)");
+    grad.addColorStop(0.55, "rgba(246, 249, 255, 0.82)");
+    grad.addColorStop(0.85, "rgba(214, 228, 245, 0.5)");
+    grad.addColorStop(1, "rgba(200, 218, 240, 0)");
     bctx.beginPath();
     bctx.fillStyle = grad;
     bctx.arc(cx, cy, p.r, 0, Math.PI * 2);
     bctx.fill();
   }
+
+  // Self-shadowing: the flat underside of the cloud turns blue-grey, as if
+  // the sunlit top were blocking light from reaching it.
+  bctx.globalCompositeOperation = "source-atop";
+  const underside = bctx.createLinearGradient(0, height * 0.35, 0, height);
+  underside.addColorStop(0, "rgba(120, 150, 190, 0)");
+  underside.addColorStop(1, "rgba(112, 140, 184, 0.5)");
+  bctx.fillStyle = underside;
+  bctx.fillRect(0, 0, width, height);
+  bctx.globalCompositeOperation = "source-over";
 
   return { bitmap, width, height, anchorX, anchorY };
 }
@@ -1096,6 +1109,113 @@ export function GalaxyBackground() {
       ctx!.restore();
     }
 
+    /** Long soft beams of light fanning out from the sun ("god rays"), with
+     * a slow shimmer so the light seems to move through haze. */
+    function drawLightShafts(now: number) {
+      const sx = width * 0.82;
+      const sy = height * 0.15;
+      const reach = Math.hypot(width, height);
+      const beams = 7;
+      ctx!.save();
+      ctx!.translate(sx, sy);
+      for (let i = 0; i < beams; i++) {
+        const spread = 0.5 + (i / (beams - 1)) * 1.05; // radians below horizontal-left
+        const angle = Math.PI * 0.5 + spread * 0.55;
+        const shimmer = 0.6 + 0.4 * Math.sin(now * 0.0004 + i * 1.7);
+        const half = 0.028 + (i % 3) * 0.012;
+        const beam = ctx!.createLinearGradient(0, 0, Math.cos(angle) * reach, Math.sin(angle) * reach);
+        beam.addColorStop(0, `rgba(255, 246, 214, ${0.16 * shimmer})`);
+        beam.addColorStop(0.55, `rgba(255, 240, 200, ${0.05 * shimmer})`);
+        beam.addColorStop(1, "rgba(255, 240, 200, 0)");
+        ctx!.fillStyle = beam;
+        ctx!.beginPath();
+        ctx!.moveTo(0, 0);
+        ctx!.lineTo(Math.cos(angle - half) * reach, Math.sin(angle - half) * reach);
+        ctx!.lineTo(Math.cos(angle + half) * reach, Math.sin(angle + half) * reach);
+        ctx!.closePath();
+        ctx!.fill();
+      }
+      ctx!.restore();
+    }
+
+    /** Faint lens-flare ghosts strung along the line from the sun through the
+     * centre of the view — the tell-tale of a bright light source. */
+    function drawLensFlare() {
+      const sx = width * 0.82;
+      const sy = height * 0.15;
+      const dx = width / 2 - sx;
+      const dy = height / 2 - sy;
+      const ghosts: Array<[number, number, string]> = [
+        [0.5, 0.05, "255, 214, 150"],
+        [0.85, 0.09, "170, 210, 255"],
+        [1.25, 0.06, "255, 190, 220"],
+        [1.6, 0.11, "190, 255, 214"],
+      ];
+      const base = Math.min(width, height);
+      for (const [t, sizeRatio, color] of ghosts) {
+        const gx = sx + dx * t;
+        const gy = sy + dy * t;
+        const r = base * sizeRatio;
+        const g = ctx!.createRadialGradient(gx, gy, r * 0.2, gx, gy, r);
+        g.addColorStop(0, `rgba(${color}, 0)`);
+        g.addColorStop(0.75, `rgba(${color}, 0.09)`);
+        g.addColorStop(1, `rgba(${color}, 0)`);
+        ctx!.fillStyle = g;
+        ctx!.beginPath();
+        ctx!.arc(gx, gy, r, 0, Math.PI * 2);
+        ctx!.fill();
+      }
+    }
+
+    /** Traces the four meadow hills (mirroring the CSS shapes) as one path so
+     * cloud shadows can be clipped to land only on the ground. */
+    function meadowPath() {
+      const path = new Path2D();
+      const hills: Array<[number, number, number, number]> = [
+        [0.25, -0.12, 0.6, 0.18],
+        [-0.15, -0.08, 0.75, 0.2],
+        [0.35, -0.1, 0.85, 0.24],
+        [0.1, -0.14, 0.95, 0.28],
+      ];
+      for (const [l, b, w, h] of hills) {
+        const left = width * l;
+        const bw = width * w;
+        const bh = height * h;
+        const top = height + height * b - bh;
+        path.ellipse(left + bw / 2, top + bh / 2, bw / 2, bh / 2, 0, 0, Math.PI * 2);
+        path.rect(left, top + bh / 2, bw, bh);
+      }
+      return path;
+    }
+
+    /** Each cloud throws a soft shadow onto the meadow, offset away from the
+     * sun and drifting with the cloud — the "ray-traced" touch. */
+    function drawCloudShadows() {
+      if (!clouds.length) return;
+      ctx!.save();
+      ctx!.clip(meadowPath());
+      for (const c of clouds) {
+        const cx = c.x - c.anchorX + c.drawWidth / 2 - c.drawWidth * 0.12;
+        const depth = Math.min(1, Math.max(0, c.y / height));
+        const cy = height * (0.8 + depth * 0.14);
+        const rx = c.drawWidth * 0.6;
+        const ry = Math.max(10, c.drawHeight * 0.35);
+        ctx!.save();
+        ctx!.translate(cx, cy);
+        ctx!.scale(1, ry / rx);
+        const g = ctx!.createRadialGradient(0, 0, 0, 0, 0, rx);
+        g.addColorStop(0, `rgba(18, 62, 44, ${0.3 * c.baseAlpha})`);
+        g.addColorStop(0.6, `rgba(18, 62, 44, ${0.14 * c.baseAlpha})`);
+        g.addColorStop(1, "rgba(18, 62, 44, 0)");
+        ctx!.fillStyle = g;
+        ctx!.beginPath();
+        ctx!.arc(0, 0, rx, 0, Math.PI * 2);
+        ctx!.fill();
+        ctx!.restore();
+      }
+      ctx!.restore();
+    }
+
     function drawCloud(c: Cloud) {
       ctx!.save();
       ctx!.globalAlpha = c.baseAlpha;
@@ -1291,7 +1411,9 @@ export function GalaxyBackground() {
     function drawParadiseSky(now: number) {
       if (!reduceMotion) sunRayPhase += 0.0006;
       drawSun(sunRayPhase);
+      drawLightShafts(now);
       drawRainbow(now);
+      drawCloudShadows();
 
       for (const m of motes) {
         m.twinklePhase += m.twinkleSpeed;
@@ -1337,6 +1459,8 @@ export function GalaxyBackground() {
       for (const b of birds) {
         drawBird(b);
       }
+
+      if (!isSmall) drawLensFlare();
     }
 
     function draw(now: number) {
@@ -1404,15 +1528,15 @@ export function GalaxyBackground() {
       <div className="nebula-blob nebula-b" />
       <div className="nebula-blob nebula-c" />
       <div className="nebula-blob nebula-core" />
-      <canvas ref={canvasRef} className="galaxy-canvas" />
-      <div className="galaxy-horizon" />
-      <div className="galaxy-vignette" />
       <div className="meadow-wrap">
         <div className="meadow-hill meadow-hill-far" />
         <div className="meadow-hill meadow-hill-back" />
         <div className="meadow-hill meadow-hill-mid" />
         <div className="meadow-hill meadow-hill-front" />
       </div>
+      <canvas ref={canvasRef} className="galaxy-canvas" />
+      <div className="galaxy-horizon" />
+      <div className="galaxy-vignette" />
     </div>
   );
 }
