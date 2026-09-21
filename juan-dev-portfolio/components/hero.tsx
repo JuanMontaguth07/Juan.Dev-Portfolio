@@ -31,9 +31,9 @@ export function Hero() {
             {t("badge")}
           </motion.span>
 
-          <h1 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl dark:text-white">
+          <h1 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl dark:text-white">
             {t("greeting")} <br />
-            {t("firstName")}{" "}
+            {t("firstName")} <br />
             <span className="bg-linear-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent dark:from-cyan-400 dark:to-blue-500">
               {t("lastName")}
             </span>

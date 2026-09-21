@@ -12,12 +12,15 @@ import type { ComponentType, SVGProps } from "react";
 import { GithubIcon } from "@/components/icons/brand-icons";
 import {
   Css3Icon,
+  ExcelIcon,
   GitIcon,
   Html5Icon,
   JavascriptIcon,
+  MongodbIcon,
   MysqlIcon,
   PhpIcon,
   PythonIcon,
+  VscodeIcon,
   WordpressIcon,
 } from "@/components/icons/tech-icons";
 
@@ -29,13 +32,13 @@ export type TechSkill = {
   monogram: string;
   accent: string;
   descriptionKey: string;
-  /**
-   * Real brand mark, when one is legally available. Visual Studio Code,
-   * Excel and TNS don't have one (Microsoft pulled its marks from the
-   * open icon set we use, and TNS isn't a public brand) — those fall
-   * back to the monogram badge rather than an invented logo.
-   */
+  /** Single-colour glyph drawn on the gradient badge. */
   icon?: IconComponent;
+  /**
+   * White logo image (public/), for brands whose mark is not in the open
+   * icon set. Drawn on the gradient badge like the glyph icons.
+   */
+  logo?: string;
   /**
    * Approximate familiarity, shown as a progress bar (0-100). Not a claim
    * of mastery — a rough sense of how comfortable I am with each tool, for
@@ -52,7 +55,7 @@ export const developmentSkills: TechSkill[] = [
     accent: "from-orange-500 to-red-500",
     descriptionKey: "html5",
     icon: Html5Icon,
-    level: 90,
+    level: 100,
   },
   {
     slug: "css3",
@@ -90,6 +93,15 @@ export const developmentSkills: TechSkill[] = [
     icon: PhpIcon,
     level: 55,
   },
+  {
+    slug: "java",
+    name: "Java",
+    monogram: "Ja",
+    accent: "from-blue-600 to-red-500",
+    descriptionKey: "java",
+    logo: "/images/tech/java.svg",
+    level: 40,
+  },
 ];
 
 export const dataSkills: TechSkill[] = [
@@ -99,6 +111,7 @@ export const dataSkills: TechSkill[] = [
     monogram: "SQL",
     accent: "from-cyan-600 to-sky-500",
     descriptionKey: "sql",
+    icon: Database,
     level: 65,
   },
   {
@@ -109,6 +122,24 @@ export const dataSkills: TechSkill[] = [
     descriptionKey: "mysql",
     icon: MysqlIcon,
     level: 65,
+  },
+  {
+    slug: "mongodb",
+    name: "MongoDB",
+    monogram: "Mo",
+    accent: "from-green-600 to-emerald-500",
+    descriptionKey: "mongodb",
+    icon: MongodbIcon,
+    level: 20,
+  },
+  {
+    slug: "firebird",
+    name: "Firebird",
+    monogram: "FB",
+    accent: "from-red-600 to-orange-500",
+    descriptionKey: "firebird",
+    logo: "/images/tech/firebird.svg",
+    level: 50,
   },
   {
     slug: "git",
@@ -137,7 +168,8 @@ export const environmentSkills: TechSkill[] = [
     monogram: "VS",
     accent: "from-blue-600 to-sky-400",
     descriptionKey: "vscode",
-    level: 90,
+    icon: VscodeIcon,
+    level: 100,
   },
   {
     slug: "wordpress",
@@ -154,6 +186,7 @@ export const environmentSkills: TechSkill[] = [
     monogram: "XL",
     accent: "from-emerald-600 to-green-500",
     descriptionKey: "excel",
+    icon: ExcelIcon,
     level: 60,
   },
   {
@@ -162,6 +195,7 @@ export const environmentSkills: TechSkill[] = [
     monogram: "TNS",
     accent: "from-cyan-600 to-teal-600",
     descriptionKey: "tns",
+    logo: "/images/tech/tns.png",
     level: 50,
   },
 ];

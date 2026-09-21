@@ -69,8 +69,68 @@
   }
 }
 
+/* Sections already carry py-20 (5rem) of their own top padding, which
+   clears the sticky navbar — any extra offset here made anchor links land
+   noticeably below the start of the section. */
 html {
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 0;
+}
+
+/* Theme switch: a slower, softer cross-fade than the default. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+}
+
+/* Highlight that sweeps across a skill bar that is at 100%. */
+.bar-shimmer {
+  left: 0;
+  animation: bar-shimmer 2.4s ease-in-out infinite;
+}
+
+@keyframes bar-shimmer {
+  0% {
+    transform: translateX(-120%);
+  }
+  60%,
+  100% {
+    transform: translateX(380%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar-shimmer {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* Language switch: the LanguageSwitcher sets data-switching on <html>
+   while the new locale loads, then removes it to fade the content back. */
+main,
+footer {
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+html[data-switching] main,
+html[data-switching] footer {
+  opacity: 0.25;
+  transform: translateY(6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main,
+  footer {
+    transition: none;
+  }
+
+  html[data-switching] main,
+  html[data-switching] footer {
+    transform: none;
+  }
 }
 
 body {

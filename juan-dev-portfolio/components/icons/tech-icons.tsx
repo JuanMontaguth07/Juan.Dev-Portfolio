@@ -2,9 +2,36 @@ import type { SVGProps } from "react";
 import { BrandGlyph } from "@/components/icons/brand-glyph";
 
 // Real brand marks sourced from simple-icons (simpleicons.org, CC0-1.0).
-// A few products (Visual Studio Code, Excel) have had their marks pulled
-// from that library for trademark reasons, so those keep a monogram badge
-// instead of an invented logo — see data/skills.ts.
+// Excel and VS Code come from an older simple-icons revision that still
+// carried them. Firebird and TNS aren't in the set at all, so they are white
+// logo files instead — see `logo` in data/skills.ts.
+
+export function MongodbIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <BrandGlyph
+      path="M17.193 9.555c-1.264-5.58-4.252-7.414-4.573-8.115-.28-.394-.53-.954-.735-1.44-.036.495-.055.685-.523 1.184-.723.566-4.438 3.682-4.74 10.02-.282 5.912 4.27 9.435 4.888 9.884l.07.05A73.49 73.49 0 0111.91 24h.481c.114-1.032.284-2.056.51-3.07.417-.296.604-.463.85-.693a11.342 11.342 0 003.639-8.464c.01-.814-.103-1.662-.197-2.218zm-5.336 8.195s0-8.291.275-8.29c.213 0 .49 10.695.49 10.695-.381-.045-.765-1.76-.765-2.405z"
+      {...props}
+    />
+  );
+}
+
+export function ExcelIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <BrandGlyph
+      path="M23 1.5q.41 0 .7.3q.3.29.3.7v19q0 .41-.3.7q-.29.3-.7.3H7q-.41 0-.7-.3q-.3-.29-.3-.7V18H1q-.41 0-.7-.3q-.3-.29-.3-.7V7q0-.41.3-.7Q.58 6 1 6h5V2.5q0-.41.3-.7q.29-.3.7-.3zM6 13.28l1.42 2.66h2.14l-2.38-3.87l2.34-3.8H7.46l-1.3 2.4l-.05.08l-.04.09l-.64-1.28l-.66-1.29H2.59l2.27 3.82l-2.48 3.85h2.16zM14.25 21v-3H7.5v3zm0-4.5v-3.75H12v3.75zm0-5.25V7.5H12v3.75zm0-5.25V3H7.5v3zm8.25 15v-3h-6.75v3zm0-4.5v-3.75h-6.75v3.75zm0-5.25V7.5h-6.75v3.75zm0-5.25V3h-6.75v3Z"
+      {...props}
+    />
+  );
+}
+
+export function VscodeIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <BrandGlyph
+      path="M23.15 2.587L18.21.21a1.49 1.49 0 0 0-1.705.29l-9.46 8.63l-4.12-3.128a1 1 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12L.326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a1 1 0 0 0 1.276.057l4.12-3.128l9.46 8.63a1.49 1.49 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352m-5.146 14.861L10.826 12l7.178-5.448z"
+      {...props}
+    />
+  );
+}
 
 export function Html5Icon(props: SVGProps<SVGSVGElement>) {
   return (

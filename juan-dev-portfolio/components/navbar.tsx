@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import {
   GithubIcon,
@@ -12,6 +12,7 @@ import {
 } from "@/components/icons/brand-icons";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useDismiss } from "@/lib/use-dismiss";
 import { useScrollPast } from "@/lib/use-scroll-past";
 import { siteConfig } from "@/lib/site-config";
 import { cn, glassCard } from "@/lib/utils";
@@ -25,9 +26,12 @@ export function Navbar() {
   const t = useTranslations("Nav");
   const bubble = useScrollPast(60);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const closeMobile = useCallback(() => setMobileOpen(false), []);
+  useDismiss(headerRef, mobileOpen, closeMobile);
 
   return (
-    <header className="sticky top-2 z-50 mx-2 sm:mx-4">
+    <header ref={headerRef} className="sticky top-2 z-50 mx-2 sm:mx-4">
       <motion.div
         animate={{ y: bubble ? 0 : -8, scale: bubble ? 1 : 0.97 }}
         transition={{ type: "spring", stiffness: 500, damping: 45, mass: 0.3 }}
@@ -114,7 +118,14 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className={cn(glassCard, "mt-2 overflow-hidden p-2 md:hidden")}
+            // Absolute so opening/closing never changes the header's height:
+            // the sticky header sits in normal flow, and a taller header
+            // shifted the page, so anchor links landed off-target once the
+            // menu closed.
+            className={cn(
+              glassCard,
+              "absolute inset-x-0 top-full mt-2 overflow-hidden p-2 md:hidden",
+            )}
           >
             <ul className="flex flex-col">
               {NAV_ITEMS.map((item) => (
