@@ -76,7 +76,9 @@
     "description": "Construyo aplicaciones web y sistemas de gestión con JavaScript, PHP y bases de datos, y me gusta convertir una idea en algo que funcione. Estudio Análisis y Desarrollo de Software en el SENA y aprendo construyendo proyectos reales.",
     "ctaProjects": "Ver mis proyectos",
     "ctaCv": "Descargar CV",
-    "ctaEmailLabel": "Enviar correo"
+    "ctaEmailLabel": "Enviar correo",
+    "availableFreelance": "Disponible como freelancer",
+    "workingContract": "Trabajando bajo contrato"
   },
   "Stats": {
     "projects": "Proyectos",

@@ -1,4 +1,4 @@
-import { Download, Mail } from "lucide-react";
+import { Briefcase, Download, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { CSSProperties } from "react";
 import { FeaturedProjectCard } from "@/components/featured-project-card";
@@ -57,6 +57,27 @@ export function Hero() {
               <Mail className="h-4 w-4" />
             </a>
           </div>
+
+          {(siteConfig.availability.freelance ||
+            siteConfig.availability.contract) && (
+            <ul className="mt-6 flex flex-wrap gap-2.5">
+              {siteConfig.availability.freelance && (
+                <li className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-semibold text-emerald-700 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-300">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 motion-safe:animate-ping dark:bg-emerald-400" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500 dark:bg-emerald-400" />
+                  </span>
+                  {t("availableFreelance")}
+                </li>
+              )}
+              {siteConfig.availability.contract && (
+                <li className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3.5 py-1.5 text-xs font-semibold text-amber-700 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-300">
+                  <Briefcase className="h-3.5 w-3.5" />
+                  {t("workingContract")}
+                </li>
+              )}
+            </ul>
+          )}
         </div>
 
         <div

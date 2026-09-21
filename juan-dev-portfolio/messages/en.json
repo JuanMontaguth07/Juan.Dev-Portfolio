@@ -76,7 +76,9 @@
     "description": "I build web applications and management systems with JavaScript, PHP and databases, and I like turning an idea into something that works. I'm studying Software Analysis and Development at SENA and learning by building real projects.",
     "ctaProjects": "View my projects",
     "ctaCv": "Download CV",
-    "ctaEmailLabel": "Send email"
+    "ctaEmailLabel": "Send email",
+    "availableFreelance": "Available for freelance work",
+    "workingContract": "Working under contract"
   },
   "Stats": {
     "projects": "Projects",

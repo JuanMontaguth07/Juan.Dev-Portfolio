@@ -76,7 +76,9 @@
     "description": "Ich baue Webanwendungen und Verwaltungssysteme mit JavaScript, PHP und Datenbanken und mache gerne aus einer Idee etwas, das funktioniert. Ich studiere Software-Analyse und -Entwicklung am SENA und lerne, indem ich echte Projekte baue.",
     "ctaProjects": "Meine Projekte ansehen",
     "ctaCv": "Lebenslauf herunterladen",
-    "ctaEmailLabel": "E-Mail senden"
+    "ctaEmailLabel": "E-Mail senden",
+    "availableFreelance": "Verfügbar für Freelance-Projekte",
+    "workingContract": "Derzeit unter Vertrag tätig"
   },
   "Stats": {
     "projects": "Projekte",
