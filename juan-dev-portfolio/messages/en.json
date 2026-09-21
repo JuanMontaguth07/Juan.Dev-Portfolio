@@ -53,6 +53,12 @@
       "Agile methodologies (Scrum)"
     ]
   },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "The path you're looking for doesn't exist or has moved.",
+    "home": "Back to home",
+    "projects": "View projects"
+  },
   "Nav": {
     "home": "Home",
     "about": "About",

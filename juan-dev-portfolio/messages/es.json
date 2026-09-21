@@ -53,6 +53,12 @@
       "Metodologías ágiles (Scrum)"
     ]
   },
+  "NotFound": {
+    "title": "Página no encontrada",
+    "description": "La ruta que buscas no existe o cambió de lugar.",
+    "home": "Volver al inicio",
+    "projects": "Ver proyectos"
+  },
   "Nav": {
     "home": "Inicio",
     "about": "Sobre mí",

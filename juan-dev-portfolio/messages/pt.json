@@ -53,6 +53,12 @@
       "Metodologias ágeis (Scrum)"
     ]
   },
+  "NotFound": {
+    "title": "Página não encontrada",
+    "description": "O caminho que você procura não existe ou mudou de lugar.",
+    "home": "Voltar ao início",
+    "projects": "Ver projetos"
+  },
   "Nav": {
     "home": "Início",
     "about": "Sobre",

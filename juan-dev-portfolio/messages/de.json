@@ -53,6 +53,12 @@
       "Agile Methoden (Scrum)"
     ]
   },
+  "NotFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Der gesuchte Pfad existiert nicht oder wurde verschoben.",
+    "home": "Zurück zur Startseite",
+    "projects": "Projekte ansehen"
+  },
   "Nav": {
     "home": "Start",
     "about": "Über mich",
