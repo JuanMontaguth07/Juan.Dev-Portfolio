@@ -38,19 +38,37 @@ type ShootingStar = {
   vy: number;
   life: number;
   maxLife: number;
+  /** "r, g, b" of the ion tail. */
   color: string;
+  /** Tail length, in frames of travel. */
+  tail: number;
+  /** Radius of the bright head. */
+  head: number;
+  /** Adds the wide, curved, warm dust tail. */
+  dust: boolean;
+  /** The rare slow, big comet. */
+  great: boolean;
 };
 
 type Planet = {
   x: number;
   y: number;
-  radius: number;
   driftX: number;
-  base: readonly [number, number, number];
-  light: readonly [number, number, number];
-  ring: string | null;
   life: number;
   maxLife: number;
+  bitmap: HTMLCanvasElement;
+};
+
+type SceneryPlanet = {
+  x: number;
+  y: number;
+  radius: number;
+  alpha: number;
+  bitmap: HTMLCanvasElement;
+  /** Ring tilt, reused to lay the moon's orbit in the same plane. */
+  ringAngle: number;
+  moon: boolean;
+  moonPhase: number;
 };
 
 type DistantGalaxy = {
@@ -120,16 +138,40 @@ const DUST_COLORS: ReadonlyArray<readonly [number, number, number]> = [
   [255, 255, 255],
 ];
 
-const PLANET_PALETTES: ReadonlyArray<{
+type PlanetPalette = {
   base: readonly [number, number, number];
   light: readonly [number, number, number];
-  ring: string | null;
+  /** gas = banded, rocky = blotchy continents/craters, ice = soft streaks. */
+  kind: "gas" | "rocky" | "ice";
+  /** Ring color when this kind of planet can have rings. */
+  ring: readonly [number, number, number] | null;
+};
+
+const PLANET_PALETTES: ReadonlyArray<PlanetPalette> = [
+  { base: [88, 58, 170], light: [186, 150, 255], kind: "gas", ring: [196, 181, 253] },
+  { base: [36, 84, 168], light: [120, 180, 255], kind: "ice", ring: null },
+  { base: [176, 88, 40], light: [255, 176, 112], kind: "gas", ring: null },
+  { base: [28, 132, 118], light: [110, 224, 200], kind: "rocky", ring: null },
+  { base: [64, 66, 94], light: [156, 158, 184], kind: "gas", ring: [203, 213, 225] },
+  { base: [150, 52, 60], light: [240, 130, 120], kind: "rocky", ring: null },
+];
+
+// Planets that stay put in the sky (proportional, like the galaxies): a
+// ringed giant with a moon on the right edge, a small ice world up left and
+// a big rocky one rising from the bottom, mostly cropped by the viewport.
+const SCENERY_PLANETS: ReadonlyArray<{
+  xRatio: number;
+  yRatio: number;
+  radiusRatio: number;
+  palette: number;
+  ring: boolean;
+  ringAngle: number;
+  alpha: number;
+  moon: boolean;
 }> = [
-  { base: [88, 58, 170], light: [186, 150, 255], ring: "rgba(196, 181, 253, 0.4)" },
-  { base: [36, 84, 168], light: [120, 180, 255], ring: "rgba(147, 197, 253, 0.35)" },
-  { base: [176, 88, 40], light: [255, 176, 112], ring: null },
-  { base: [28, 132, 118], light: [110, 224, 200], ring: null },
-  { base: [64, 66, 94], light: [156, 158, 184], ring: "rgba(203, 213, 225, 0.3)" },
+  { xRatio: 0.95, yRatio: 0.56, radiusRatio: 0.05, palette: 0, ring: true, ringAngle: -0.42, alpha: 0.9, moon: true },
+  { xRatio: 0.045, yRatio: 0.18, radiusRatio: 0.024, palette: 1, ring: false, ringAngle: 0, alpha: 0.8, moon: false },
+  { xRatio: 0.3, yRatio: 1.04, radiusRatio: 0.085, palette: 5, ring: false, ringAngle: 0, alpha: 0.72, moon: false },
 ];
 
 // Three distant galaxies, anchored at fixed relative positions so they
@@ -341,6 +383,143 @@ function renderGalaxyBitmap(
   return bitmap;
 }
 
+/**
+ * Paints a planet once: atmosphere glow, banded (gas), blotchy (rocky) or
+ * streaky (ice) surface, a terminator shadow for a lit-from-upper-left look,
+ * a rim of light and, optionally, a ring whose far half sits behind the planet
+ * and whose near half crosses in front of it.
+ */
+function renderPlanetBitmap(
+  radius: number,
+  palette: PlanetPalette,
+  withRing: boolean,
+  ringAngle: number,
+) {
+  const half = Math.ceil(radius * (withRing ? 2.3 : 1.5));
+  const size = half * 2;
+  const bitmap = document.createElement("canvas");
+  bitmap.width = size;
+  bitmap.height = size;
+  const b = bitmap.getContext("2d")!;
+  const c = half;
+  const [br, bg, bb] = palette.base;
+  const [lr, lg, lb] = palette.light;
+  const ringColor = palette.ring ?? [220, 220, 235];
+
+  const glow = b.createRadialGradient(c, c, radius * 0.9, c, c, radius * 1.5);
+  glow.addColorStop(0, `rgba(${lr}, ${lg}, ${lb}, 0.3)`);
+  glow.addColorStop(1, `rgba(${lr}, ${lg}, ${lb}, 0)`);
+  b.fillStyle = glow;
+  b.beginPath();
+  b.arc(c, c, radius * 1.5, 0, Math.PI * 2);
+  b.fill();
+
+  const RING_BANDS = [
+    { r: 1.5, w: 0.16, a: 0.5 },
+    { r: 1.74, w: 0.24, a: 0.4 },
+    { r: 2.02, w: 0.1, a: 0.28 },
+  ];
+  const drawRingHalf = (from: number, to: number) => {
+    b.save();
+    b.translate(c, c);
+    b.rotate(ringAngle);
+    b.scale(1, 0.3);
+    b.lineCap = "butt";
+    for (const band of RING_BANDS) {
+      b.strokeStyle = `rgba(${ringColor[0]}, ${ringColor[1]}, ${ringColor[2]}, ${band.a})`;
+      b.lineWidth = band.w * radius;
+      b.beginPath();
+      b.arc(0, 0, band.r * radius, from, to);
+      b.stroke();
+    }
+    b.restore();
+  };
+
+  if (withRing) drawRingHalf(Math.PI, Math.PI * 2);
+
+  b.save();
+  b.beginPath();
+  b.arc(c, c, radius, 0, Math.PI * 2);
+  b.clip();
+
+  const body = b.createRadialGradient(
+    c - radius * 0.35,
+    c - radius * 0.35,
+    radius * 0.1,
+    c,
+    c,
+    radius * 1.1,
+  );
+  body.addColorStop(0, `rgb(${lr}, ${lg}, ${lb})`);
+  body.addColorStop(0.55, `rgb(${br}, ${bg}, ${bb})`);
+  body.addColorStop(1, `rgb(${Math.round(br * 0.4)}, ${Math.round(bg * 0.4)}, ${Math.round(bb * 0.4)})`);
+  b.fillStyle = body;
+  b.fillRect(c - radius, c - radius, radius * 2, radius * 2);
+
+  if (palette.kind === "gas") {
+    b.save();
+    b.translate(c, c);
+    b.rotate(-0.18);
+    const stripes = 16;
+    for (let i = 0; i < stripes; i++) {
+      const y = -radius + (i / stripes) * radius * 2 + (Math.random() - 0.5) * radius * 0.05;
+      const h = radius * (0.06 + Math.random() * 0.16);
+      const mix = Math.random();
+      const sr = Math.round(br + (lr - br) * mix);
+      const sg = Math.round(bg + (lg - bg) * mix);
+      const sb = Math.round(bb + (lb - bb) * mix);
+      b.fillStyle = `rgba(${sr}, ${sg}, ${sb}, ${0.1 + Math.random() * 0.2})`;
+      b.fillRect(-radius, y, radius * 2, h);
+    }
+    b.restore();
+  } else if (palette.kind === "rocky") {
+    for (let i = 0; i < 16; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const d = Math.sqrt(Math.random()) * radius * 0.85;
+      const r = radius * (0.07 + Math.random() * 0.2);
+      const dark = Math.random() < 0.6;
+      b.fillStyle = dark
+        ? `rgba(${Math.round(br * 0.5)}, ${Math.round(bg * 0.5)}, ${Math.round(bb * 0.5)}, ${0.14 + Math.random() * 0.14})`
+        : `rgba(${lr}, ${lg}, ${lb}, ${0.1 + Math.random() * 0.12})`;
+      b.beginPath();
+      b.arc(c + Math.cos(a) * d, c + Math.sin(a) * d, r, 0, Math.PI * 2);
+      b.fill();
+    }
+  } else {
+    for (let i = 0; i < 7; i++) {
+      const y = c - radius + Math.random() * radius * 2;
+      b.fillStyle = `rgba(255, 255, 255, ${0.05 + Math.random() * 0.09})`;
+      b.fillRect(c - radius, y, radius * 2, radius * (0.04 + Math.random() * 0.1));
+    }
+  }
+
+  const shadow = b.createRadialGradient(
+    c - radius * 0.5,
+    c - radius * 0.5,
+    radius * 0.25,
+    c,
+    c,
+    radius * 1.18,
+  );
+  shadow.addColorStop(0, "rgba(0, 0, 8, 0)");
+  shadow.addColorStop(0.55, "rgba(0, 0, 8, 0.12)");
+  shadow.addColorStop(1, "rgba(0, 0, 12, 0.82)");
+  b.fillStyle = shadow;
+  b.fillRect(c - radius, c - radius, radius * 2, radius * 2);
+  b.restore();
+
+  // Thin rim of light on the lit side.
+  b.strokeStyle = `rgba(${lr}, ${lg}, ${lb}, 0.45)`;
+  b.lineWidth = Math.max(1, radius * 0.045);
+  b.beginPath();
+  b.arc(c, c, radius * 0.985, Math.PI * 0.85, Math.PI * 1.7);
+  b.stroke();
+
+  if (withRing) drawRingHalf(0, Math.PI);
+
+  return { bitmap, size };
+}
+
 /** Bakes a cloud's puffs to an offscreen bitmap once, so the animation
  * loop only ever has to blit an image instead of rebuilding gradients. */
 function renderCloudBitmap(
@@ -434,6 +613,7 @@ export function GalaxyBackground() {
     let galaxies: DistantGalaxy[] = [];
     let shootingStars: ShootingStar[] = [];
     let planet: Planet | null = null;
+    let sceneryPlanets: SceneryPlanet[] = [];
     let clouds: Cloud[] = [];
     let birds: Bird[] = [];
     let motes: Dust[] = [];
@@ -467,7 +647,9 @@ export function GalaxyBackground() {
     let lastSparkle = performance.now();
     let nextSparkleDelay = 1200 + Math.random() * 1800;
     let lastPlanetAt = performance.now();
-    let nextPlanetDelay = 10000 + Math.random() * 12000;
+    let nextPlanetDelay = 8000 + Math.random() * 8000;
+    let lastGreatAt = performance.now();
+    let nextGreatDelay = 22000 + Math.random() * 20000;
     let lastBirds = performance.now();
     let nextBirdDelay = 9000 + Math.random() * 12000;
     let lastBurstAt = performance.now();
@@ -624,27 +806,52 @@ export function GalaxyBackground() {
       seedGalaxies();
       seedClouds();
       seedMotes();
+      seedSceneryPlanets();
     }
 
     resize();
     window.addEventListener("resize", resize);
 
-    function spawnShootingStar() {
+    function spawnShootingStar(great = false) {
       const fromLeft = Math.random() > 0.5;
-      const startX = fromLeft ? -20 : width + 20;
-      const startY = Math.random() * height * 0.5;
-      const speed = 7 + Math.random() * 4;
-      const angle = Math.PI / 7;
-      const [r, g, b] =
-        COMET_COLORS[Math.floor(Math.random() * COMET_COLORS.length)];
+      const angle = great ? randomBetween(0.16, 0.3) : randomBetween(0.12, 0.5);
+      const speed = great ? randomBetween(2.4, 3.2) : randomBetween(6.5, 11);
+      const [r, g, b] = great
+        ? [190, 230, 255]
+        : COMET_COLORS[Math.floor(Math.random() * COMET_COLORS.length)];
       shootingStars.push({
-        x: startX,
-        y: startY,
+        x: fromLeft ? -30 : width + 30,
+        y: Math.random() * height * (great ? 0.35 : 0.55),
         vx: (fromLeft ? 1 : -1) * Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
         life: 0,
-        maxLife: 55,
+        maxLife: great ? 500 : randomBetween(55, 85),
         color: `${r}, ${g}, ${b}`,
+        tail: great ? 70 : randomBetween(7, 11),
+        head: great ? 7 : randomBetween(2.2, 3.4),
+        dust: great || Math.random() < 0.4,
+        great,
+      });
+    }
+
+    function makePlanetBitmap(radius: number, palette: PlanetPalette, ring: boolean, ringAngle: number) {
+      return renderPlanetBitmap(radius, palette, ring, ringAngle).bitmap;
+    }
+
+    function seedSceneryPlanets() {
+      sceneryPlanets = SCENERY_PLANETS.map((layout) => {
+        const radius = Math.max(14, Math.min(96, width * layout.radiusRatio));
+        const palette = PLANET_PALETTES[layout.palette];
+        return {
+          x: width * layout.xRatio,
+          y: height * layout.yRatio,
+          radius,
+          alpha: layout.alpha,
+          bitmap: makePlanetBitmap(radius, palette, layout.ring && palette.ring !== null, layout.ringAngle),
+          ringAngle: layout.ringAngle,
+          moon: layout.moon,
+          moonPhase: Math.random() * Math.PI * 2,
+        };
       });
     }
 
@@ -653,16 +860,14 @@ export function GalaxyBackground() {
         PLANET_PALETTES[Math.floor(Math.random() * PLANET_PALETTES.length)];
       const fromLeft = Math.random() > 0.5;
       const radius = randomBetween(26, 54);
+      const ring = palette.ring !== null && Math.random() < 0.6;
       planet = {
-        x: fromLeft ? -radius * 0.4 : width + radius * 0.4,
+        x: fromLeft ? -radius * 0.6 : width + radius * 0.6,
         y: height * randomBetween(0.08, 0.4),
-        radius,
         driftX: (fromLeft ? 1 : -1) * randomBetween(0.05, 0.11),
-        base: palette.base,
-        light: palette.light,
-        ring: palette.ring && Math.random() < 0.6 ? palette.ring : null,
         life: 0,
         maxLife: randomBetween(1800, 3200),
+        bitmap: makePlanetBitmap(radius, palette, ring, randomBetween(-0.5, -0.2)),
       };
     }
 
@@ -705,52 +910,105 @@ export function GalaxyBackground() {
       const opacity = Math.max(0, Math.min(fadeIn, fadeOut));
       if (opacity <= 0) return;
 
-      const [br, bg, bb] = p.base;
-      const [lr, lg, lb] = p.light;
+      ctx!.save();
+      ctx!.globalAlpha = opacity;
+      ctx!.drawImage(p.bitmap, p.x - p.bitmap.width / 2, p.y - p.bitmap.height / 2);
+      ctx!.restore();
+    }
 
-      if (p.ring) {
-        ctx!.save();
-        ctx!.globalAlpha = opacity;
-        ctx!.translate(p.x, p.y);
-        ctx!.rotate(-0.34);
-        ctx!.scale(1, 0.32);
+    function drawSceneryPlanet(p: SceneryPlanet) {
+      const half = p.bitmap.width / 2;
+      ctx!.save();
+      ctx!.globalAlpha = p.alpha;
+      ctx!.drawImage(p.bitmap, p.x - half, p.y - half);
+      ctx!.restore();
+
+      if (!p.moon) return;
+      if (!reduceMotion) p.moonPhase += 0.0035;
+
+      // The moon travels an ellipse in the ring's plane; its far half of the
+      // orbit passes behind the planet, so it's hidden there.
+      const orbitX = Math.cos(p.moonPhase) * p.radius * 2.7;
+      const orbitY = Math.sin(p.moonPhase) * p.radius * 0.8;
+      const cos = Math.cos(p.ringAngle);
+      const sin = Math.sin(p.ringAngle);
+      const mx = p.x + orbitX * cos - orbitY * sin;
+      const my = p.y + orbitX * sin + orbitY * cos;
+      const behind = Math.sin(p.moonPhase) < 0;
+      if (behind && Math.hypot(mx - p.x, my - p.y) < p.radius * 1.02) return;
+
+      const mr = Math.max(2.5, p.radius * 0.16);
+      const moon = ctx!.createRadialGradient(mx - mr * 0.35, my - mr * 0.35, mr * 0.1, mx, my, mr);
+      moon.addColorStop(0, `rgba(240, 240, 250, ${p.alpha})`);
+      moon.addColorStop(1, `rgba(90, 92, 120, ${p.alpha})`);
+      ctx!.fillStyle = moon;
+      ctx!.beginPath();
+      ctx!.arc(mx, my, mr, 0, Math.PI * 2);
+      ctx!.fill();
+    }
+
+    function drawComet(s: ShootingStar) {
+      const alpha = Math.sin((s.life / s.maxLife) * Math.PI);
+      if (alpha <= 0) return;
+      const tx = s.x - s.vx * s.tail;
+      const ty = s.y - s.vy * s.tail;
+
+      ctx!.save();
+      ctx!.lineCap = "round";
+
+      if (s.dust) {
+        // Wide, warm dust tail that bends away from the ion tail.
+        const dx = tx - s.vy * s.tail * 0.35;
+        const dy = ty + s.vx * s.tail * 0.35;
+        const dust = ctx!.createLinearGradient(s.x, s.y, dx, dy);
+        dust.addColorStop(0, `rgba(255, 225, 160, ${alpha * 0.34})`);
+        dust.addColorStop(1, "rgba(255, 200, 120, 0)");
+        ctx!.strokeStyle = dust;
+        ctx!.lineWidth = s.head * 1.9;
         ctx!.beginPath();
-        ctx!.arc(0, 0, p.radius * 1.9, 0, Math.PI * 2);
-        ctx!.strokeStyle = p.ring;
-        ctx!.lineWidth = p.radius * 0.22;
+        ctx!.moveTo(s.x, s.y);
+        ctx!.quadraticCurveTo(
+          (s.x + tx) / 2 - s.vy * s.tail * 0.22,
+          (s.y + ty) / 2 + s.vx * s.tail * 0.22,
+          dx,
+          dy,
+        );
         ctx!.stroke();
-        ctx!.restore();
       }
 
-      const shade = ctx!.createRadialGradient(
-        p.x - p.radius * 0.35,
-        p.y - p.radius * 0.35,
-        p.radius * 0.1,
-        p.x,
-        p.y,
-        p.radius,
-      );
-      shade.addColorStop(0, `rgba(${lr}, ${lg}, ${lb}, ${opacity})`);
-      shade.addColorStop(1, `rgba(${br}, ${bg}, ${bb}, ${opacity})`);
+      const ion = ctx!.createLinearGradient(s.x, s.y, tx, ty);
+      ion.addColorStop(0, `rgba(${s.color}, ${alpha * 0.95})`);
+      ion.addColorStop(1, `rgba(${s.color}, 0)`);
+      ctx!.strokeStyle = ion;
+      ctx!.lineWidth = Math.max(1.3, s.head * 0.55);
       ctx!.beginPath();
-      ctx!.fillStyle = shade;
-      ctx!.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx!.moveTo(s.x, s.y);
+      ctx!.lineTo(tx, ty);
+      ctx!.stroke();
+
+      const head = ctx!.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.head * 3.2);
+      head.addColorStop(0, `rgba(255, 255, 255, ${alpha})`);
+      head.addColorStop(0.25, `rgba(${s.color}, ${alpha * 0.85})`);
+      head.addColorStop(1, `rgba(${s.color}, 0)`);
+      ctx!.fillStyle = head;
+      ctx!.beginPath();
+      ctx!.arc(s.x, s.y, s.head * 3.2, 0, Math.PI * 2);
       ctx!.fill();
 
-      const glow = ctx!.createRadialGradient(
-        p.x,
-        p.y,
-        p.radius,
-        p.x,
-        p.y,
-        p.radius * 2.2,
-      );
-      glow.addColorStop(0, `rgba(${lr}, ${lg}, ${lb}, ${opacity * 0.18})`);
-      glow.addColorStop(1, `rgba(${lr}, ${lg}, ${lb}, 0)`);
-      ctx!.beginPath();
-      ctx!.fillStyle = glow;
-      ctx!.arc(p.x, p.y, p.radius * 2.2, 0, Math.PI * 2);
-      ctx!.fill();
+      if (s.great) {
+        // Glittering debris shed along the tail.
+        ctx!.fillStyle = `rgba(255, 255, 255, ${alpha * 0.7})`;
+        for (let i = 0; i < 4; i++) {
+          const t = Math.random();
+          ctx!.fillRect(
+            s.x - s.vx * s.tail * t + (Math.random() - 0.5) * s.head * 2.4,
+            s.y - s.vy * s.tail * t + (Math.random() - 0.5) * s.head * 2.4,
+            1.4,
+            1.4,
+          );
+        }
+      }
+      ctx!.restore();
     }
 
     function drawGalaxy(g: DistantGalaxy) {
@@ -927,7 +1185,7 @@ export function GalaxyBackground() {
         if (planet.life >= planet.maxLife) {
           planet = null;
           lastPlanetAt = now;
-          nextPlanetDelay = 45000 + Math.random() * 55000;
+          nextPlanetDelay = 25000 + Math.random() * 35000;
         }
       } else if (!reduceMotion && now - lastPlanetAt > nextPlanetDelay) {
         spawnPlanet();
@@ -938,6 +1196,10 @@ export function GalaxyBackground() {
         nextSparkleDelay = 900 + Math.random() * 1600;
         const candidate = stars[Math.floor(Math.random() * stars.length)];
         if (candidate) candidate.sparkleUntil = now + 650;
+      }
+
+      for (const sp of sceneryPlanets) {
+        drawSceneryPlanet(sp);
       }
 
       for (const star of stars) {
@@ -999,6 +1261,12 @@ export function GalaxyBackground() {
           nextBurstDelay = 70000 + Math.random() * 90000;
         }
 
+        if (now - lastGreatAt > nextGreatDelay) {
+          lastGreatAt = now;
+          nextGreatDelay = 45000 + Math.random() * 60000;
+          spawnShootingStar(true);
+        }
+
         if (now - lastShot > nextShotDelay) {
           lastShot = now;
           if (burstRemaining > 0) {
@@ -1015,22 +1283,7 @@ export function GalaxyBackground() {
           s.life += 1;
           s.x += s.vx;
           s.y += s.vy;
-          const progress = s.life / s.maxLife;
-          const alpha = Math.sin(progress * Math.PI);
-          const gradient = ctx!.createLinearGradient(
-            s.x,
-            s.y,
-            s.x - s.vx * 6,
-            s.y - s.vy * 6,
-          );
-          gradient.addColorStop(0, `rgba(${s.color}, ${alpha})`);
-          gradient.addColorStop(1, `rgba(${s.color}, 0)`);
-          ctx!.strokeStyle = gradient;
-          ctx!.lineWidth = 1.5;
-          ctx!.beginPath();
-          ctx!.moveTo(s.x, s.y);
-          ctx!.lineTo(s.x - s.vx * 6, s.y - s.vy * 6);
-          ctx!.stroke();
+          drawComet(s);
         }
       }
     }
