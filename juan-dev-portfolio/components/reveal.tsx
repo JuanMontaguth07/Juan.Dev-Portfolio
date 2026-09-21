@@ -1,13 +1,12 @@
-"use client";
+import type { CSSProperties, ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
-import { motion, type Variants } from "framer-motion";
-import type { ReactNode } from "react";
-
-const variants: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0 },
-};
-
+/**
+ * Fade-up on scroll, done entirely in CSS (see `.reveal` in globals.css) so
+ * the ~30 instances on the page cost no JavaScript to hydrate. `delay` (in
+ * seconds, as before) staggers where in the entry range the fade starts.
+ * Browsers without scroll-driven animations simply show the content.
+ */
 export function Reveal({
   children,
   delay = 0,
@@ -18,15 +17,15 @@ export function Reveal({
   className?: string;
 }) {
   return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
-      variants={variants}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+    <div
+      className={cn("reveal", className)}
+      style={
+        delay
+          ? ({ "--reveal-offset": `${Math.round(delay * 100)}%` } as CSSProperties)
+          : undefined
+      }
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
