@@ -24,9 +24,10 @@ export type Project = {
   /** Real screenshot, when there is one. Falls back to the gradient when absent. */
   image?: string;
   /**
-   * GitHub-style language breakdown, only set when measured from real
-   * source (lines of code per file type) — omitted rather than guessed
-   * for projects whose code isn't in this repo.
+   * Language breakdown copied from the project's GitHub repository (the
+   * "Languages" API, share of bytes per language), snapshot taken 2026-09.
+   * Only set for projects that have a public repo — omitted rather than
+   * guessed for the rest. Re-run the API call to refresh it.
    */
   languages?: LanguageStat[];
   collaboration?: "solo" | "team";
@@ -51,9 +52,9 @@ export const featuredProject: Project = {
   status: "finished",
   image: "/images/projects/portfolio.png",
   languages: [
-    { name: "TypeScript", percent: 91, color: "#3178c6" },
-    { name: "CSS", percent: 8, color: "#563d7c" },
-    { name: "JavaScript", percent: 1, color: "#f1e05a" },
+    { name: "TypeScript", percent: 94.3, color: "#3178c6" },
+    { name: "CSS", percent: 5.4, color: "#663399" },
+    { name: "JavaScript", percent: 0.3, color: "#f1e05a" },
   ],
   collaboration: "solo",
   links: {
@@ -75,6 +76,12 @@ const sayfer: Project = {
   // Confirmed: the user plus 4 other people.
   teamSize: 5,
   links: { repo: "https://github.com/angel-DSM/Sayfer" },
+  languages: [
+    { name: "Java", percent: 39.6, color: "#b07219" },
+    { name: "JavaScript", percent: 32.8, color: "#f1e05a" },
+    { name: "HTML", percent: 18.8, color: "#e34c26" },
+    { name: "CSS", percent: 8.8, color: "#663399" },
+  ],
 };
 
 const hardwareMarketplace: Project = {
@@ -111,6 +118,11 @@ const weatherApp: Project = {
   image: "/images/projects/weather-app.png",
   collaboration: "solo",
   links: { repo: "https://github.com/JuanMontaguth07/weather-app-test" },
+  languages: [
+    { name: "CSS", percent: 49.1, color: "#663399" },
+    { name: "JavaScript", percent: 35.2, color: "#f1e05a" },
+    { name: "HTML", percent: 15.7, color: "#e34c26" },
+  ],
 };
 
 const legalResearch: Project = {
