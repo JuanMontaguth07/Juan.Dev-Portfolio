@@ -35,6 +35,12 @@ export type Project = {
   teamSize?: number;
   /** Public links, shown on the detail page only when real ones exist. */
   links?: { repo?: string; demo?: string };
+  /**
+   * A project built for the owner's own use rather than as a portfolio
+   * showcase — shown with a "personal project" badge instead of repo/demo
+   * links, even if a private repo exists.
+   */
+  personal?: boolean;
 };
 
 /**
@@ -125,6 +131,18 @@ const weatherApp: Project = {
   ],
 };
 
+const personalFinance: Project = {
+  slug: "personal-finance",
+  messageKey: "personalFinance",
+  href: "/projects/personal-finance",
+  categories: ["tools", "web"],
+  tags: ["HTML5", "CSS3", "JavaScript"],
+  gradient: "from-emerald-500/45 via-green-600/25 to-slate-950",
+  status: "finished",
+  collaboration: "solo",
+  personal: true,
+};
+
 const legalResearch: Project = {
   slug: "legal-software-research",
   messageKey: "legalResearch",
@@ -141,5 +159,6 @@ export const projects: Project[] = [
   hardwareMarketplace,
   hardwareStore,
   weatherApp,
+  personalFinance,
   legalResearch,
 ];

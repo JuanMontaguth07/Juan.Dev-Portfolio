@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowLeft, Check, ExternalLink, User, Users } from "lucide-react";
+import { ArrowLeft, Check, ExternalLink, Lock, User, Users } from "lucide-react";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -50,6 +50,7 @@ export default async function ProjectDetailPage(
 
   const t = await getTranslations("ProjectData");
   const td = await getTranslations("ProjectDetail");
+  const tProjects = await getTranslations("Projects");
   const key = project.messageKey;
 
   const title = t(`${key}.title`);
@@ -88,9 +89,17 @@ export default async function ProjectDetailPage(
       </Reveal>
 
       <Reveal delay={0.05} className="mt-6">
-        <ProjectStatusBadge status={project.status}>
-          {hasCustomStatus ? t(`${key}.status`) : undefined}
-        </ProjectStatusBadge>
+        <div className="flex flex-wrap items-center gap-2">
+          <ProjectStatusBadge status={project.status}>
+            {hasCustomStatus ? t(`${key}.status`) : undefined}
+          </ProjectStatusBadge>
+          {project.personal && (
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-black/5 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-slate-600 uppercase dark:border-white/10 dark:bg-white/5 dark:text-zinc-300">
+              <Lock className="h-3 w-3" />
+              {tProjects("personalBadge")}
+            </span>
+          )}
+        </div>
         <h1 className="mt-5 text-3xl font-bold text-slate-900 sm:text-4xl dark:text-white">
           {title}
         </h1>
@@ -161,6 +170,20 @@ export default async function ProjectDetailPage(
           <p className="mt-5 text-base leading-relaxed text-slate-600 dark:text-zinc-300">
             {t(`${key}.demonstrates`)}
           </p>
+        </Reveal>
+      )}
+
+      {project.personal && !project.links && (
+        <Reveal delay={0.28} className="mt-12">
+          <div
+            className={cn(
+              glassCard,
+              "flex items-start gap-3 p-5 text-sm text-slate-600 dark:text-zinc-300",
+            )}
+          >
+            <Lock className="mt-0.5 h-4 w-4 shrink-0 text-slate-400 dark:text-zinc-500" />
+            <p>{tProjects("personalNote")}</p>
+          </div>
         </Reveal>
       )}
 

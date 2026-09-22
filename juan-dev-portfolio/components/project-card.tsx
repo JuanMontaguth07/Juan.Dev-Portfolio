@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Lock } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
@@ -52,7 +52,15 @@ export function ProjectCard({ project }: { project: Project }) {
           <h3 className="text-base font-semibold text-slate-900 dark:text-white">
             {title}
           </h3>
-          <ProjectStatusBadge status={project.status} className="shrink-0" />
+          <div className="flex shrink-0 flex-col items-end gap-1.5">
+            <ProjectStatusBadge status={project.status} />
+            {project.personal && (
+              <span className="inline-flex items-center gap-1 rounded-full border border-black/10 bg-black/5 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-slate-600 uppercase dark:border-white/10 dark:bg-white/5 dark:text-zinc-300">
+                <Lock className="h-3 w-3" />
+                {t("personalBadge")}
+              </span>
+            )}
+          </div>
         </div>
         <p className="mt-2 flex-1 text-sm text-slate-600 dark:text-zinc-400">
           {description}

@@ -257,6 +257,8 @@
     "viewAll": "Ver todos os projetos",
     "allTitle": "Todos os meus projetos",
     "noResults": "Ainda não tenho um projeto publicado nessa categoria.",
+    "personalBadge": "Projeto pessoal",
+    "personalNote": "Este é um projeto pessoal para uso próprio, não algo pensado para ser mostrado como produto comercial — por isso não tem links de repositório ou demonstração pública.",
     "status": {
       "mvp": "MVP",
       "finished": "Concluído",
@@ -314,6 +316,20 @@
         "Pesquisa",
         "Análise comparativa"
       ]
+    },
+    "personalFinance": {
+      "title": "Finanzas — Personal Finance Manager",
+      "description": "Um aplicativo web para gerenciar receitas, gastos, orçamentos e metas de economia, feito como projeto pessoal para melhorar meu próprio fluxo financeiro.",
+      "tagline": "Um projeto pessoal para manter minhas finanças organizadas, não algo pensado para ser mostrado como produto comercial.",
+      "whatIBuilt": [
+        "Registro de receitas e gastos",
+        "Orçamentos e metas de economia",
+        "Persistência com armazenamento local do navegador",
+        "Importação de extratos bancários do Nequi",
+        "Deploy no GitHub Pages"
+      ],
+      "participation": "Design e desenvolvimento próprios, com um fluxo iterativo de design, implementação, testes e refinamento. Usei ferramentas de IA como apoio durante o desenvolvimento, mas as decisões sobre estrutura e funcionalidade são minhas.",
+      "demonstrates": "Que consigo pegar um problema real do meu dia a dia e construir minha própria ferramenta para resolvê-lo, do início ao fim."
     }
   },
   "ProjectDetail": {
