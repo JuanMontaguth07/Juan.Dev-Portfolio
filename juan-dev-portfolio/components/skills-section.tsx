@@ -4,11 +4,19 @@ import { SectionLabel } from "@/components/section-label";
 import { PrimarySkillTile } from "@/components/skill-tile";
 import { cn, glassCard } from "@/lib/utils";
 import {
+  aiSkills,
   approachSkills,
   dataSkills,
   developmentSkills,
   environmentSkills,
 } from "@/data/skills";
+
+const skillGroups = [
+  { labelKey: "groupDevelopment", skills: developmentSkills },
+  { labelKey: "groupData", skills: dataSkills },
+  { labelKey: "groupAi", skills: aiSkills },
+  { labelKey: "groupEnvironment", skills: environmentSkills },
+] as const;
 
 export function SkillsSection() {
   const t = useTranslations("Skills");
@@ -32,74 +40,30 @@ export function SkillsSection() {
       </Reveal>
 
       <div className="mt-12 space-y-12">
-        <div>
-          <Reveal>
-            <SectionLabel>{t("groupDevelopment")}</SectionLabel>
-          </Reveal>
-          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {developmentSkills.map((skill, i) => {
-              const { icon: Icon, ...serializableSkill } = skill;
-              return (
-                <Reveal key={skill.slug} delay={i * 0.05}>
-                  <PrimarySkillTile
-                    skill={serializableSkill}
-                    icon={
-                      Icon && <Icon className="h-5 w-5" aria-hidden="true" />
-                    }
-                    description={t(`descriptions.${skill.descriptionKey}`)}
-                    levelLabel={t("levelLabel")}
-                  />
-                </Reveal>
-              );
-            })}
+        {skillGroups.map(({ labelKey, skills }) => (
+          <div key={labelKey}>
+            <Reveal>
+              <SectionLabel>{t(labelKey)}</SectionLabel>
+            </Reveal>
+            <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {skills.map((skill, i) => {
+                const { icon: Icon, ...serializableSkill } = skill;
+                return (
+                  <Reveal key={skill.slug} delay={i * 0.05}>
+                    <PrimarySkillTile
+                      skill={serializableSkill}
+                      icon={
+                        Icon && <Icon className="h-5 w-5" aria-hidden="true" />
+                      }
+                      description={t(`descriptions.${skill.descriptionKey}`)}
+                      levelLabel={t("levelLabel")}
+                    />
+                  </Reveal>
+                );
+              })}
+            </div>
           </div>
-        </div>
-
-        <div>
-          <Reveal>
-            <SectionLabel>{t("groupData")}</SectionLabel>
-          </Reveal>
-          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {dataSkills.map((skill, i) => {
-              const { icon: Icon, ...serializableSkill } = skill;
-              return (
-                <Reveal key={skill.slug} delay={i * 0.05}>
-                  <PrimarySkillTile
-                    skill={serializableSkill}
-                    icon={
-                      Icon && <Icon className="h-5 w-5" aria-hidden="true" />
-                    }
-                    description={t(`descriptions.${skill.descriptionKey}`)}
-                    levelLabel={t("levelLabel")}
-                  />
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-
-        <div>
-          <Reveal>
-            <SectionLabel>{t("groupEnvironment")}</SectionLabel>
-          </Reveal>
-          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {environmentSkills.map((skill, i) => {
-              const { icon: Icon, ...serializableSkill } = skill;
-              return (
-                <Reveal key={skill.slug} delay={i * 0.05}>
-                  <PrimarySkillTile
-                    skill={serializableSkill}
-                    icon={
-                      Icon && <Icon className="h-5 w-5" aria-hidden="true" />
-                    }
-                    description={t(`descriptions.${skill.descriptionKey}`)}
-                    levelLabel={t("levelLabel")}
-                  />
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
+        ))}
 
         <div>
           <Reveal>

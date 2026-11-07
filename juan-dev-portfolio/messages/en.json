@@ -73,7 +73,7 @@
     "greeting": "Hi, I'm",
     "firstName": "Juan Diego",
     "lastName": "Montaguth Rodríguez",
-    "description": "I build web applications and management systems with JavaScript, PHP and databases, and I like turning an idea into something that works. I'm studying Software Analysis and Development at SENA and learning by building real projects.",
+    "description": "I build web applications and management systems with JavaScript, TypeScript, Next.js and databases, and I work with AI agents to turn an idea into something that works, faster. I'm studying Software Analysis and Development at SENA and learning by building real projects.",
     "ctaProjects": "View my projects",
     "ctaCv": "Download CV",
     "ctaEmailLabel": "Send email",
@@ -94,6 +94,7 @@
     "intro3": "I'm especially drawn to projects that connect <b>software with real-world problems</b>: processes that can be automated, information that can be organized better, and tools that can make someone's work simpler.",
     "intro4": "That's why I'm not interested in learning a technology just to say I know it. I want to understand <b>why it exists, when to use it, and how it fits into a bigger system</b>.",
     "intro5": "Right now I'm strengthening my foundations in software development, databases, and application architecture. I'm also exploring how to go from small projects and MVPs to more complete, maintainable applications that can actually grow.",
+    "intro6": "My workflow includes <b>AI tools and agents</b> —such as Claude Code, Claude, ChatGPT and Gemini— to research, prototype, test and document faster. I treat them as a team that speeds up the work, not a replacement for judgment: <b>architecture, design and quality decisions are still mine</b>.",
     "processLabel": "How I build",
     "process": [
       {
@@ -130,7 +131,8 @@
       "Databases",
       "Process automation",
       "Application architecture",
-      "Building MVPs"
+      "Building MVPs",
+      "AI-agent development"
     ]
   },
   "Skills": {
@@ -140,6 +142,7 @@
     "groupDevelopment": "Development",
     "levelLabel": "Familiarity",
     "groupData": "Data & version control",
+    "groupAi": "AI and agents",
     "groupEnvironment": "Environment & tools",
     "groupApproaches": "What I'm building as a developer",
     "descriptions": {
@@ -165,12 +168,24 @@
       "tailwind": "Fast, consistent styling with utility classes.",
       "postgresql": "Relational database with rules, functions and security.",
       "supabase": "Backend with PostgreSQL, authentication and storage.",
-      "vercel": "Deploying and shipping web applications."
+      "vercel": "Deploying and shipping web applications.",
+      "claudeCode": "A coding agent in the terminal to implement, refactor and test.",
+      "claude": "Analysis, technical writing and solving complex problems.",
+      "chatgpt": "Quick questions, brainstorming and support while learning.",
+      "gemini": "Research and cross-checking information from another angle.",
+      "copilot": "AI code completion right inside the editor.",
+      "cursor": "An AI-native editor for working across the whole project.",
+      "aria": "Opera's built-in AI assistant for searching while I browse.",
+      "figma": "Designing interfaces and prototypes before writing code."
     },
     "approaches": {
       "mvp": {
         "title": "MVP development",
         "description": "I turn an idea into a first working version so I can test it, find issues and evolve it."
+      },
+      "aiWorkflow": {
+        "title": "AI-agent development",
+        "description": "I bring AI agents into the whole cycle —analysis, code, testing and documentation— and review and validate every result before it reaches the project."
       },
       "requirements": {
         "title": "Requirements analysis",
@@ -203,7 +218,8 @@
       "Software architecture",
       "Backend",
       "Databases",
-      "Automation"
+      "Automation",
+      "AI agents"
     ],
     "learningQuote": "I don't want to learn tools just to fill up a list. I want to learn them because some project made me need them."
   },

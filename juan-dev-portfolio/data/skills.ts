@@ -1,18 +1,27 @@
 import {
+  Bot,
   Database,
   FileText,
   Layers,
+  MessageCircle,
   Puzzle,
   Rocket,
   Search,
+  Sparkles,
   Workflow,
   type LucideIcon,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 import { GithubIcon } from "@/components/icons/brand-icons";
 import {
+  ClaudeCodeIcon,
+  ClaudeIcon,
+  CopilotIcon,
   Css3Icon,
+  CursorIcon,
   ExcelIcon,
+  FigmaIcon,
+  GeminiIcon,
   GitIcon,
   Html5Icon,
   JavascriptIcon,
@@ -222,6 +231,76 @@ export const dataSkills: TechSkill[] = [
   },
 ];
 
+/**
+ * AI tools and agents used day to day. ChatGPT and Aria have no mark in the
+ * open icon set, so they get a generic glyph (like SQL's database icon).
+ */
+export const aiSkills: TechSkill[] = [
+  {
+    slug: "claudeCode",
+    name: "Claude Code",
+    monogram: "CC",
+    accent: "from-orange-600 to-amber-500",
+    descriptionKey: "claudeCode",
+    icon: ClaudeCodeIcon,
+    level: 90,
+  },
+  {
+    slug: "claude",
+    name: "Claude",
+    monogram: "Cl",
+    accent: "from-orange-500 to-rose-400",
+    descriptionKey: "claude",
+    icon: ClaudeIcon,
+    level: 90,
+  },
+  {
+    slug: "chatgpt",
+    name: "ChatGPT",
+    monogram: "GPT",
+    accent: "from-emerald-700 to-teal-500",
+    descriptionKey: "chatgpt",
+    icon: MessageCircle,
+    level: 80,
+  },
+  {
+    slug: "gemini",
+    name: "Gemini",
+    monogram: "Ge",
+    accent: "from-blue-600 to-violet-500",
+    descriptionKey: "gemini",
+    icon: GeminiIcon,
+    level: 65,
+  },
+  {
+    slug: "copilot",
+    name: "GitHub Copilot",
+    monogram: "Co",
+    accent: "from-slate-800 to-indigo-600",
+    descriptionKey: "copilot",
+    icon: CopilotIcon,
+    level: 60,
+  },
+  {
+    slug: "cursor",
+    name: "Cursor",
+    monogram: "Cu",
+    accent: "from-zinc-800 to-slate-500",
+    descriptionKey: "cursor",
+    icon: CursorIcon,
+    level: 55,
+  },
+  {
+    slug: "aria",
+    name: "Aria",
+    monogram: "Ar",
+    accent: "from-rose-600 to-pink-500",
+    descriptionKey: "aria",
+    icon: Sparkles,
+    level: 50,
+  },
+];
+
 export const environmentSkills: TechSkill[] = [
   {
     slug: "vscode",
@@ -240,6 +319,15 @@ export const environmentSkills: TechSkill[] = [
     descriptionKey: "vercel",
     icon: VercelIcon,
     level: 70,
+  },
+  {
+    slug: "figma",
+    name: "Figma",
+    monogram: "Fi",
+    accent: "from-rose-500 to-violet-500",
+    descriptionKey: "figma",
+    icon: FigmaIcon,
+    level: 50,
   },
   {
     slug: "wordpress",
@@ -277,6 +365,7 @@ export type ApproachSkill = {
 
 export const approachSkills: ApproachSkill[] = [
   { slug: "mvp", icon: Rocket },
+  { slug: "aiWorkflow", icon: Bot },
   { slug: "requirements", icon: Search },
   { slug: "databaseDesign", icon: Database },
   { slug: "automation", icon: Workflow },

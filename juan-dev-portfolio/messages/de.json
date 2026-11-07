@@ -73,7 +73,7 @@
     "greeting": "Hallo, ich bin",
     "firstName": "Juan Diego",
     "lastName": "Montaguth Rodríguez",
-    "description": "Ich baue Webanwendungen und Verwaltungssysteme mit JavaScript, PHP und Datenbanken und mache gerne aus einer Idee etwas, das funktioniert. Ich studiere Software-Analyse und -Entwicklung am SENA und lerne, indem ich echte Projekte baue.",
+    "description": "Ich baue Webanwendungen und Verwaltungssysteme mit JavaScript, TypeScript, Next.js und Datenbanken und arbeite mit KI-Agenten, um aus einer Idee schneller etwas zu machen, das funktioniert. Ich studiere Software-Analyse und -Entwicklung am SENA und lerne, indem ich echte Projekte baue.",
     "ctaProjects": "Meine Projekte ansehen",
     "ctaCv": "Lebenslauf herunterladen",
     "ctaEmailLabel": "E-Mail senden",
@@ -94,6 +94,7 @@
     "intro3": "Mich interessieren besonders Projekte, die <b>Software mit echten Problemen</b> verbinden: Prozesse, die automatisiert werden können, Informationen, die sich besser organisieren lassen, und Werkzeuge, die jemandem die Arbeit erleichtern.",
     "intro4": "Deshalb interessiert es mich nicht, eine Technologie nur zu lernen, um sagen zu können, dass ich sie kenne. Ich will verstehen, <b>warum es sie gibt, wann man sie einsetzt und wie sie in ein größeres System passt</b>.",
     "intro5": "Gerade vertiefe ich meine Grundlagen in Softwareentwicklung, Datenbanken und Anwendungsarchitektur. Außerdem erkunde ich, wie man von kleinen Projekten und MVPs zu vollständigeren, wartbaren Anwendungen kommt, die wirklich wachsen können.",
+    "intro6": "In meinem Workflow nutze ich <b>KI-Tools und Agenten</b> —etwa Claude Code, Claude, ChatGPT und Gemini—, um schneller zu recherchieren, Prototypen zu bauen, zu testen und zu dokumentieren. Ich sehe sie als Team, das die Arbeit beschleunigt, nicht als Ersatz für Urteilsvermögen: <b>Entscheidungen über Architektur, Design und Qualität treffe weiterhin ich</b>.",
     "processLabel": "So baue ich",
     "process": [
       {
@@ -130,7 +131,8 @@
       "Datenbanken",
       "Prozessautomatisierung",
       "Anwendungsarchitektur",
-      "Aufbau von MVPs"
+      "Aufbau von MVPs",
+      "Entwicklung mit KI-Agenten"
     ]
   },
   "Skills": {
@@ -140,6 +142,7 @@
     "groupDevelopment": "Entwicklung",
     "levelLabel": "Vertrautheit",
     "groupData": "Daten & Versionskontrolle",
+    "groupAi": "KI und Agenten",
     "groupEnvironment": "Umgebung & Tools",
     "groupApproaches": "Woran ich als Entwickler arbeite",
     "descriptions": {
@@ -165,12 +168,24 @@
       "tailwind": "Schnelles, einheitliches Styling mit Utility-Klassen.",
       "postgresql": "Relationale Datenbank mit Regeln, Funktionen und Sicherheit.",
       "supabase": "Backend mit PostgreSQL, Authentifizierung und Speicher.",
-      "vercel": "Deployment und Veröffentlichung von Web-Apps."
+      "vercel": "Deployment und Veröffentlichung von Web-Apps.",
+      "claudeCode": "Ein Coding-Agent im Terminal zum Implementieren, Refaktorieren und Testen.",
+      "claude": "Analyse, technisches Schreiben und Lösen komplexer Probleme.",
+      "chatgpt": "Schnelle Fragen, Brainstorming und Unterstützung beim Lernen.",
+      "gemini": "Recherche und Abgleich von Informationen aus anderer Sicht.",
+      "copilot": "KI-Code-Vervollständigung direkt im Editor.",
+      "cursor": "Ein Editor mit integrierter KI für das ganze Projekt.",
+      "aria": "Der KI-Assistent im Opera-Browser für die Suche beim Surfen.",
+      "figma": "Gestaltung von Oberflächen und Prototypen vor dem Programmieren."
     },
     "approaches": {
       "mvp": {
         "title": "MVP-Entwicklung",
         "description": "Ich verwandle eine Idee in eine erste funktionierende Version, um sie zu testen, Probleme zu finden und weiterzuentwickeln."
+      },
+      "aiWorkflow": {
+        "title": "Entwicklung mit KI-Agenten",
+        "description": "Ich setze KI-Agenten im gesamten Zyklus ein —Analyse, Code, Tests und Dokumentation— und prüfe und validiere jedes Ergebnis, bevor es ins Projekt kommt."
       },
       "requirements": {
         "title": "Anforderungsanalyse",
@@ -203,7 +218,8 @@
       "Softwarearchitektur",
       "Backend",
       "Datenbanken",
-      "Automatisierung"
+      "Automatisierung",
+      "KI-Agenten"
     ],
     "learningQuote": "Ich will keine Werkzeuge lernen, nur um eine Liste zu füllen. Ich will sie lernen, weil mich irgendein Projekt dazu gezwungen hat, sie zu brauchen."
   },

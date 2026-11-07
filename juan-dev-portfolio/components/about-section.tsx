@@ -49,7 +49,7 @@ export function AboutSection() {
       </Reveal>
 
       <div className="mt-8 max-w-3xl space-y-4">
-        {([1, 2, 3, 4, 5] as const).map((n, i) => (
+        {([1, 2, 3, 4, 5, 6] as const).map((n, i) => (
           <Reveal key={n} delay={0.1 + i * 0.06}>
             <p className="text-base leading-relaxed text-slate-600 dark:text-zinc-300">
               {t.rich(`intro${n}`, richValues)}

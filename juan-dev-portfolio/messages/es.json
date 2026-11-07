@@ -73,7 +73,7 @@
     "greeting": "Hola, soy",
     "firstName": "Juan Diego",
     "lastName": "Montaguth Rodríguez",
-    "description": "Construyo aplicaciones web y sistemas de gestión con JavaScript, PHP y bases de datos, y me gusta convertir una idea en algo que funcione. Estudio Análisis y Desarrollo de Software en el SENA y aprendo construyendo proyectos reales.",
+    "description": "Construyo aplicaciones web y sistemas de gestión con JavaScript, TypeScript, Next.js y bases de datos, y trabajo con agentes de IA para convertir una idea en algo que funcione, más rápido. Estudio Análisis y Desarrollo de Software en el SENA y aprendo construyendo proyectos reales.",
     "ctaProjects": "Ver mis proyectos",
     "ctaCv": "Descargar CV",
     "ctaEmailLabel": "Enviar correo",
@@ -94,6 +94,7 @@
     "intro3": "Me interesan especialmente los proyectos que conectan <b>software con problemas del mundo real</b>: procesos que pueden automatizarse, información que puede organizarse mejor y herramientas que pueden hacer que una persona trabaje de una manera más sencilla.",
     "intro4": "Por eso no me interesa aprender una tecnología únicamente para poder decir que la conozco. Quiero entender <b>por qué existe, cuándo utilizarla y cómo encaja dentro de un sistema más grande</b>.",
     "intro5": "Actualmente estoy fortaleciendo mis bases en desarrollo de software, bases de datos y arquitectura de aplicaciones. También estoy explorando cómo pasar de pequeños proyectos y MVPs a aplicaciones más completas, mantenibles y capaces de crecer.",
+    "intro6": "En mi flujo de trabajo uso <b>herramientas y agentes de IA</b> —como Claude Code, Claude, ChatGPT y Gemini— para investigar, prototipar, probar y documentar más rápido. Los trato como un equipo que acelera el trabajo, no como un reemplazo del criterio: <b>las decisiones de arquitectura, diseño y calidad siguen siendo mías</b>.",
     "processLabel": "Mi forma de construir",
     "process": [
       {
@@ -130,7 +131,8 @@
       "Bases de datos",
       "Automatización de procesos",
       "Arquitectura de aplicaciones",
-      "Construcción de MVPs"
+      "Construcción de MVPs",
+      "Desarrollo con agentes de IA"
     ]
   },
   "Skills": {
@@ -140,6 +142,7 @@
     "groupDevelopment": "Desarrollo",
     "levelLabel": "Familiaridad",
     "groupData": "Datos y control de versiones",
+    "groupAi": "IA y agentes",
     "groupEnvironment": "Entorno y herramientas",
     "groupApproaches": "Lo que estoy construyendo como desarrollador",
     "descriptions": {
@@ -165,12 +168,24 @@
       "tailwind": "Estilos rápidos y consistentes con clases utilitarias.",
       "postgresql": "Base de datos relacional con reglas, funciones y seguridad.",
       "supabase": "Backend con PostgreSQL, autenticación y almacenamiento.",
-      "vercel": "Despliegue y publicación de aplicaciones web."
+      "vercel": "Despliegue y publicación de aplicaciones web.",
+      "claudeCode": "Agente de programación en la terminal para implementar, refactorizar y probar.",
+      "claude": "Análisis, redacción técnica y resolución de problemas complejos.",
+      "chatgpt": "Consultas rápidas, lluvia de ideas y apoyo para aprender.",
+      "gemini": "Investigación y contraste de información desde otra perspectiva.",
+      "copilot": "Autocompletado de código con IA dentro del editor.",
+      "cursor": "Editor con IA integrada para trabajar sobre todo el proyecto.",
+      "aria": "Asistente de IA del navegador Opera para buscar mientras navego.",
+      "figma": "Diseño de interfaces y prototipos antes de programar."
     },
     "approaches": {
       "mvp": {
         "title": "Desarrollo de MVP",
         "description": "Convierto una idea en una primera versión funcional para poder probarla, encontrar problemas y evolucionarla."
+      },
+      "aiWorkflow": {
+        "title": "Desarrollo con agentes de IA",
+        "description": "Integro agentes de IA en todo el ciclo —análisis, código, pruebas y documentación— y reviso y valido cada resultado antes de que llegue al proyecto."
       },
       "requirements": {
         "title": "Análisis de requerimientos",
@@ -203,7 +218,8 @@
       "Arquitectura de software",
       "Backend",
       "Bases de datos",
-      "Automatización"
+      "Automatización",
+      "Agentes de IA"
     ],
     "learningQuote": "No quiero aprender herramientas para llenar una lista. Quiero aprenderlas porque algún proyecto me obligó a necesitarlas."
   },
