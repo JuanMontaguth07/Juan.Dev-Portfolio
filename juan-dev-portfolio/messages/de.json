@@ -81,7 +81,14 @@
     "ctaCv": "Lebenslauf herunterladen",
     "ctaEmailLabel": "E-Mail senden",
     "availableFreelance": "Verfügbar für Freelance-Projekte",
-    "workingContract": "Derzeit unter Vertrag tätig"
+    "workingContract": "Derzeit unter Vertrag tätig",
+    "statusVerbs": [
+      "Vorstellen",
+      "Verstehen",
+      "Bauen",
+      "Iterieren"
+    ],
+    "statusHint": "Esc zum Abbrechen"
   },
   "Stats": {
     "projects": "Projekte",

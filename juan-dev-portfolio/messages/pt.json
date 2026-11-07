@@ -81,7 +81,14 @@
     "ctaCv": "Baixar CV",
     "ctaEmailLabel": "Enviar e-mail",
     "availableFreelance": "Disponível para freelance",
-    "workingContract": "Trabalhando sob contrato"
+    "workingContract": "Trabalhando sob contrato",
+    "statusVerbs": [
+      "Imaginando",
+      "Entendendo",
+      "Construindo",
+      "Iterando"
+    ],
+    "statusHint": "esc para interromper"
   },
   "Stats": {
     "projects": "Projetos",

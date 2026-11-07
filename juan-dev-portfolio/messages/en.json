@@ -81,7 +81,14 @@
     "ctaCv": "Download CV",
     "ctaEmailLabel": "Send email",
     "availableFreelance": "Available for freelance work",
-    "workingContract": "Working under contract"
+    "workingContract": "Working under contract",
+    "statusVerbs": [
+      "Imagining",
+      "Understanding",
+      "Building",
+      "Iterating"
+    ],
+    "statusHint": "esc to interrupt"
   },
   "Stats": {
     "projects": "Projects",

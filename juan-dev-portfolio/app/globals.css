@@ -61,6 +61,59 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
+  --color-claude: #d97757;
+}
+
+/* Claude-style touch: headings in an editorial serif. */
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+}
+
+/* Claude Code's "working" glyph: steps through · ✢ ✳ ✶ ✻ ✽ and back. */
+.claude-spinner::before {
+  content: "✻";
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .claude-spinner::before {
+    animation: claude-spin 1.2s steps(1) infinite;
+  }
+}
+
+@keyframes claude-spin {
+  0% {
+    content: "·";
+  }
+  10% {
+    content: "✢";
+  }
+  20% {
+    content: "✳";
+  }
+  30% {
+    content: "✶";
+  }
+  40% {
+    content: "✻";
+  }
+  50% {
+    content: "✽";
+  }
+  60% {
+    content: "✻";
+  }
+  70% {
+    content: "✶";
+  }
+  80% {
+    content: "✳";
+  }
+  90% {
+    content: "✢";
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

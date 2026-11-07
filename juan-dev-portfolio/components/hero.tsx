@@ -1,6 +1,7 @@
 import { Briefcase, Download, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { CSSProperties } from "react";
+import { ClaudeStatus } from "@/components/claude-status";
 import { FeaturedProjectCard } from "@/components/featured-project-card";
 import { siteConfig } from "@/lib/site-config";
 
@@ -78,6 +79,8 @@ export function Hero() {
               )}
             </ul>
           )}
+
+          <ClaudeStatus />
         </div>
 
         <div
