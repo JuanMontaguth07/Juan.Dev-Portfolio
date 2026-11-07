@@ -285,13 +285,23 @@
       "participation": "Design, direction and development of the project. I used AI-assisted development tools as support during implementation, but the decisions about structure, features, design and behavior come from my own instructions and judgment.",
       "demonstrates": "This project represents my ability to take an idea, define how I want it to work, and turn it into a real application. It's also a way of showing that I'm not learning technologies in isolation: I'm learning to integrate them into a complete project."
     },
-    "hardwareMarketplace": {
-      "title": "Hardware Marketplace",
-      "description": "A platform to sell components and assemblies, with a cost estimator, assembler profiles, accounts with reviews, and the option of in-person support."
-    },
     "hardwareStore": {
-      "title": "Hardware Store",
-      "description": "A site to sell our own products and spare parts, built to stay transparent with the customer and backed by AI support for questions."
+      "title": "Kova Studio — Hardware Store",
+      "description": "An e-commerce store for PC components, hardware and prebuilt computers in Colombia, with a catalog, cart, checkout and an admin panel for products, inventory and orders.",
+      "tagline": "A real online store, live in production, built end to end: from the database to the deployment.",
+      "status": "Finished · Live",
+      "whatIBuilt": [
+        "Catalog with spec sheets, filters and search",
+        "“Build your PC” configurator that flags part compatibility instantly",
+        "Kovi, an assistant that offers tips while you browse",
+        "Cart and checkout with prices and stock validated in PostgreSQL",
+        "Admin panel for products, prices, inventory and orders",
+        "Supabase authentication and layered security (Zod, RLS and database functions)",
+        "Design system with light and dark themes",
+        "Testing with Vitest, PGlite and Playwright, and deployment on Vercel"
+      ],
+      "participation": "The project belongs to a team of three, but I handled all of the development on my own: design, architecture, data model, business logic, interface and deployment.",
+      "demonstrates": "That I can take a complete full-stack application to production, with a database, authentication, security, testing and deployment."
     },
     "weatherApp": {
       "title": "Weather App",
@@ -304,7 +314,8 @@
         "Inventory and production control",
         "Logging of feeding, medication and mortality",
         "Database organization and handling",
-        "Business logic designed for a real poultry-sector environment"
+        "Business logic designed for a real poultry-sector environment",
+        "Dashboard frontend in React and TypeScript, built from the Figma design"
       ]
     },
     "legalResearch": {
@@ -326,7 +337,8 @@
         "Budgets and savings goals",
         "Persistence via browser local storage",
         "Import of Nequi bank statements",
-        "Deployment on GitHub Pages"
+        "Deployment on GitHub Pages",
+        "Installable as an app (PWA) on phone and PC"
       ],
       "participation": "Own design and development, with an iterative flow of design, implementation, testing and refinement. I used AI tools as support during development, but the decisions about structure and functionality are mine.",
       "demonstrates": "That I can take a real problem from my everyday life and build my own tool to solve it, start to finish."

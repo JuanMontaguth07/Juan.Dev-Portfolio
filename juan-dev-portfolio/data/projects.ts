@@ -24,6 +24,11 @@ export type Project = {
   /** Real screenshot, when there is one. Falls back to the gradient when absent. */
   image?: string;
   /**
+   * Which part of the screenshot the card's short crop keeps (a Tailwind
+   * object-position class). Defaults to "object-top".
+   */
+  imagePosition?: "object-top" | "object-center";
+  /**
    * Language breakdown copied from the project's GitHub repository (the
    * "Languages" API, share of bytes per language), snapshot taken 2026-09.
    * Only set for projects that have a public repo — omitted rather than
@@ -74,7 +79,9 @@ const sayfer: Project = {
   messageKey: "sayfer",
   href: "/projects/sayfer",
   categories: ["web", "fullstack"],
-  tags: ["Java", "JavaScript", "HTML5", "CSS3"],
+  // React + TypeScript come from the dashboard frontend, kept in its own repo
+  // (JuanMontaguth07/FrontEndSayfer); the language bar below is the main repo's.
+  tags: ["Java", "JavaScript", "React", "TypeScript", "HTML5", "CSS3"],
   gradient: "from-amber-400/50 via-yellow-500/25 to-slate-950",
   status: "finished",
   image: "/images/projects/sayfer.svg",
@@ -90,27 +97,40 @@ const sayfer: Project = {
   ],
 };
 
-const hardwareMarketplace: Project = {
-  slug: "hardware-marketplace",
-  messageKey: "hardwareMarketplace",
-  href: "/projects/hardware-marketplace",
-  categories: ["web", "fullstack"],
-  tags: ["HTML5", "CSS3", "JavaScript", "SQL"],
-  gradient: "from-amber-500/45 via-orange-600/25 to-slate-950",
-  status: "mvp",
-  collaboration: "team",
-  teamSize: 3,
-};
-
+/**
+ * Kova Studio — the hardware store, now live. It absorbed the old "Hardware
+ * Marketplace" entry (same project); /projects/hardware-marketplace redirects
+ * here (see next.config.ts). Slug kept as "hardware-store" so links shared
+ * before the rename keep working.
+ */
 const hardwareStore: Project = {
   slug: "hardware-store",
   messageKey: "hardwareStore",
   href: "/projects/hardware-store",
   categories: ["web", "fullstack"],
-  // Same stack as this portfolio, per confirmation.
-  tags: featuredProject.tags,
+  tags: [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "Supabase",
+    "PostgreSQL",
+  ],
   gradient: "from-blue-500/40 via-cyan-500/25 to-slate-950",
-  status: "inDevelopment",
+  status: "finished",
+  image: "/images/projects/kova-studio.png",
+  // Confirmed: a 3-person team on paper, but all development was the user's alone.
+  collaboration: "solo",
+  links: {
+    repo: "https://github.com/JuanMontaguth07/WebEcomerce",
+    demo: "https://kovastudio-sigma.vercel.app",
+  },
+  // Snapshot 2026-11 (JavaScript at 0.03% omitted).
+  languages: [
+    { name: "TypeScript", percent: 89.8, color: "#3178c6" },
+    { name: "PLpgSQL", percent: 8.0, color: "#336790" },
+    { name: "CSS", percent: 2.2, color: "#663399" },
+  ],
 };
 
 const weatherApp: Project = {
@@ -139,8 +159,19 @@ const personalFinance: Project = {
   tags: ["HTML5", "CSS3", "JavaScript"],
   gradient: "from-emerald-500/45 via-green-600/25 to-slate-950",
   status: "finished",
+  // The PIN lock screen; centered so the crop keeps the card, not the ceiling.
+  image: "/images/projects/personal-finance.png",
+  imagePosition: "object-center",
   collaboration: "solo",
   personal: true,
+  // Repo made public later; the badge stays, the links now show too.
+  links: { repo: "https://github.com/JuanMontaguth07/Finanzas" },
+  // Snapshot 2026-11.
+  languages: [
+    { name: "JavaScript", percent: 93.4, color: "#f1e05a" },
+    { name: "CSS", percent: 5.2, color: "#663399" },
+    { name: "HTML", percent: 1.4, color: "#e34c26" },
+  ],
 };
 
 const legalResearch: Project = {
@@ -155,9 +186,8 @@ const legalResearch: Project = {
 
 export const projects: Project[] = [
   featuredProject,
-  sayfer,
-  hardwareMarketplace,
   hardwareStore,
+  sayfer,
   weatherApp,
   personalFinance,
   legalResearch,

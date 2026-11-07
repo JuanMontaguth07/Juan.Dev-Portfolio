@@ -285,13 +285,23 @@
       "participation": "Design, direção e desenvolvimento do projeto. Usei ferramentas de desenvolvimento assistido por IA como apoio durante a implementação, mas as decisões sobre estrutura, funcionalidades, design e comportamento do projeto partem das minhas próprias instruções e critérios.",
       "demonstrates": "Este projeto representa minha capacidade de pegar uma ideia, definir como quero que funcione e transformá-la em uma aplicação real. Também é uma forma de mostrar que não estou aprendendo tecnologias de forma isolada: estou aprendendo a integrá-las dentro de um projeto completo."
     },
-    "hardwareMarketplace": {
-      "title": "Marketplace de Hardware",
-      "description": "Uma plataforma para vender componentes e montagens, com estimador de custos, perfis de montadores, contas com comentários e a opção de suporte presencial."
-    },
     "hardwareStore": {
-      "title": "Loja de Hardware",
-      "description": "Um site para vender produtos fabricados por nós e peças avulsas, pensado para ser transparente com o cliente e com apoio de IA para tirar dúvidas."
+      "title": "Kova Studio — Loja de Hardware",
+      "description": "Um e-commerce de componentes de PC, hardware e computadores montados para a Colômbia, com catálogo, carrinho, checkout e painel de administração de produtos, estoque e pedidos.",
+      "tagline": "Uma loja online real, em produção, construída de ponta a ponta: do banco de dados ao deploy.",
+      "status": "Concluído · Em produção",
+      "whatIBuilt": [
+        "Catálogo com fichas técnicas, filtros e busca",
+        "Configurador «Monte seu PC» que avisa na hora se as peças são compatíveis",
+        "Kovi, um assistente que acompanha a navegação com dicas",
+        "Carrinho e checkout com preços e estoque validados no PostgreSQL",
+        "Painel de administração de produtos, preços, estoque e pedidos",
+        "Autenticação com Supabase e segurança em camadas (Zod, RLS e funções no banco de dados)",
+        "Sistema de design com tema claro e escuro",
+        "Testes com Vitest, PGlite e Playwright, e deploy na Vercel"
+      ],
+      "participation": "O projeto é de uma equipe de três pessoas, mas todo o desenvolvimento foi feito só por mim: design, arquitetura, modelo de dados, lógica de negócio, interface e deploy.",
+      "demonstrates": "Que consigo levar uma aplicação full stack completa para produção, com banco de dados, autenticação, segurança, testes e deploy."
     },
     "weatherApp": {
       "title": "App do Clima",
@@ -304,7 +314,8 @@
         "Controle de estoque e produção",
         "Registro de alimentação, medicamentos e mortalidade",
         "Organização e manejo do banco de dados",
-        "Lógica de negócio pensada para um ambiente real do setor avícola"
+        "Lógica de negócio pensada para um ambiente real do setor avícola",
+        "Frontend do dashboard em React e TypeScript, a partir do design no Figma"
       ]
     },
     "legalResearch": {
@@ -326,7 +337,8 @@
         "Orçamentos e metas de economia",
         "Persistência com armazenamento local do navegador",
         "Importação de extratos bancários do Nequi",
-        "Deploy no GitHub Pages"
+        "Deploy no GitHub Pages",
+        "Instalável como app (PWA) no celular e no PC"
       ],
       "participation": "Design e desenvolvimento próprios, com um fluxo iterativo de design, implementação, testes e refinamento. Usei ferramentas de IA como apoio durante o desenvolvimento, mas as decisões sobre estrutura e funcionalidade são minhas.",
       "demonstrates": "Que consigo pegar um problema real do meu dia a dia e construir minha própria ferramenta para resolvê-lo, do início ao fim."

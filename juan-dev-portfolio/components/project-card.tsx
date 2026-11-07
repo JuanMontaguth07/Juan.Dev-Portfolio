@@ -35,7 +35,10 @@ export function ProjectCard({ project }: { project: Project }) {
               alt={title}
               fill
               sizes="(min-width: 1024px) 25vw, 50vw"
-              className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              className={cn(
+                "object-cover transition-transform duration-500 group-hover:scale-105",
+                project.imagePosition ?? "object-top",
+              )}
             />
             <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
           </>

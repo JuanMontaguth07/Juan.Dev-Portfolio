@@ -285,13 +285,23 @@
       "participation": "Design, Leitung und Entwicklung des Projekts. Ich habe KI-gestützte Entwicklungstools als Unterstützung bei der Umsetzung genutzt, aber die Entscheidungen über Struktur, Funktionen, Design und Verhalten des Projekts stammen von meinen eigenen Vorgaben und Kriterien.",
       "demonstrates": "Dieses Projekt zeigt meine Fähigkeit, eine Idee zu nehmen, festzulegen, wie sie funktionieren soll, und sie in eine echte Anwendung zu verwandeln. Es zeigt auch, dass ich Technologien nicht isoliert lerne: Ich lerne, sie in ein vollständiges Projekt zu integrieren."
     },
-    "hardwareMarketplace": {
-      "title": "Hardware-Marktplatz",
-      "description": "Eine Plattform zum Verkauf von Komponenten und Baugruppen, mit Kostenrechner, Profilen für Monteure, Konten mit Bewertungen und der Möglichkeit persönlichen Supports."
-    },
     "hardwareStore": {
-      "title": "Hardware-Shop",
-      "description": "Eine Website zum Verkauf eigener Produkte und Ersatzteile, transparent gegenüber dem Kunden gestaltet und mit KI-Unterstützung bei Fragen."
+      "title": "Kova Studio — Hardware-Shop",
+      "description": "Ein E-Commerce-Shop für PC-Komponenten, Hardware und vormontierte Computer in Kolumbien, mit Katalog, Warenkorb, Checkout und einem Admin-Bereich für Produkte, Bestand und Bestellungen.",
+      "tagline": "Ein echter Online-Shop, live in Produktion, von Anfang bis Ende gebaut: von der Datenbank bis zum Deployment.",
+      "status": "Fertig · Live",
+      "whatIBuilt": [
+        "Katalog mit technischen Datenblättern, Filtern und Suche",
+        "„Stell deinen PC zusammen“-Konfigurator, der die Kompatibilität der Teile sofort prüft",
+        "Kovi, ein Assistent, der beim Stöbern Tipps gibt",
+        "Warenkorb und Checkout mit in PostgreSQL validierten Preisen und Beständen",
+        "Admin-Bereich für Produkte, Preise, Bestand und Bestellungen",
+        "Authentifizierung mit Supabase und mehrschichtige Sicherheit (Zod, RLS und Datenbankfunktionen)",
+        "Designsystem mit hellem und dunklem Theme",
+        "Tests mit Vitest, PGlite und Playwright sowie Deployment auf Vercel"
+      ],
+      "participation": "Das Projekt gehört einem dreiköpfigen Team, aber die gesamte Entwicklung habe ich allein übernommen: Design, Architektur, Datenmodell, Geschäftslogik, Oberfläche und Deployment.",
+      "demonstrates": "Dass ich eine vollständige Full-Stack-Anwendung in Produktion bringen kann, mit Datenbank, Authentifizierung, Sicherheit, Tests und Deployment."
     },
     "weatherApp": {
       "title": "Wetter-App",
@@ -304,7 +314,8 @@
         "Bestands- und Produktionskontrolle",
         "Erfassung von Fütterung, Medikamenten und Sterblichkeit",
         "Organisation und Verwaltung der Datenbank",
-        "Geschäftslogik für eine reale Umgebung im Geflügelsektor"
+        "Geschäftslogik für eine reale Umgebung im Geflügelsektor",
+        "Dashboard-Frontend in React und TypeScript, auf Basis des Figma-Designs"
       ]
     },
     "legalResearch": {
@@ -326,7 +337,8 @@
         "Budgets und Sparziele",
         "Persistenz über lokalen Browser-Speicher",
         "Import von Nequi-Kontoauszügen",
-        "Deployment auf GitHub Pages"
+        "Deployment auf GitHub Pages",
+        "Als App (PWA) auf Handy und PC installierbar"
       ],
       "participation": "Eigenes Design und eigene Entwicklung, mit einem iterativen Ablauf aus Design, Umsetzung, Tests und Verfeinerung. Ich habe KI-Tools als Unterstützung während der Entwicklung genutzt, aber die Entscheidungen über Struktur und Funktionalität stammen von mir.",
       "demonstrates": "Dass ich ein echtes Problem aus meinem Alltag nehmen und ein eigenes Werkzeug bauen kann, um es von Anfang bis Ende zu lösen."
