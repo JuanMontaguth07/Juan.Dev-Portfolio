@@ -3,17 +3,16 @@ import {
   Database,
   FileText,
   Layers,
-  MessageCircle,
   Puzzle,
   Rocket,
   Search,
-  Sparkles,
   Workflow,
   type LucideIcon,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 import { GithubIcon } from "@/components/icons/brand-icons";
 import {
+  ChatgptIcon,
   ClaudeCodeIcon,
   ClaudeIcon,
   CopilotIcon,
@@ -28,6 +27,7 @@ import {
   MongodbIcon,
   MysqlIcon,
   NextjsIcon,
+  OperaIcon,
   PhpIcon,
   PostgresqlIcon,
   PythonIcon,
@@ -232,8 +232,7 @@ export const dataSkills: TechSkill[] = [
 ];
 
 /**
- * AI tools and agents used day to day. ChatGPT and Aria have no mark in the
- * open icon set, so they get a generic glyph (like SQL's database icon).
+ * AI tools and agents used day to day (all confirmed by the user).
  */
 export const aiSkills: TechSkill[] = [
   {
@@ -260,7 +259,7 @@ export const aiSkills: TechSkill[] = [
     monogram: "GPT",
     accent: "from-emerald-700 to-teal-500",
     descriptionKey: "chatgpt",
-    icon: MessageCircle,
+    icon: ChatgptIcon,
     level: 80,
   },
   {
@@ -296,7 +295,7 @@ export const aiSkills: TechSkill[] = [
     monogram: "Ar",
     accent: "from-rose-600 to-pink-500",
     descriptionKey: "aria",
-    icon: Sparkles,
+    icon: OperaIcon,
     level: 50,
   },
 ];

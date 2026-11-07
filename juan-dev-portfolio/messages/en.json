@@ -11,6 +11,9 @@
     "experienceLabel": "Project-based experience",
     "languagesLabel": "Languages",
     "professionalLabel": "Professional skills",
+    "certificationsLabel": "Certifications",
+    "certificationsSource": "Anthropic Academy · {count, plural, one {# course} other {# courses}}",
+    "certificationIssued": "Issued {date}",
     "education": {
       "period": "Expected completion: 2026",
       "title": "Technologist in Software Analysis and Development",

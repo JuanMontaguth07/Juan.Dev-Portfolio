@@ -1,7 +1,9 @@
 import { Briefcase, GraduationCap, Languages } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { CertificationBadges } from "@/components/certification-badges";
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
+import { certifications } from "@/data/certifications";
 import { cn, glassCard } from "@/lib/utils";
 
 type Experience = {
@@ -157,6 +159,16 @@ export function JourneySection() {
             </Reveal>
           </div>
         </div>
+      </div>
+
+      <div className="mt-14">
+        <Reveal className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <SectionLabel>{t("certificationsLabel")}</SectionLabel>
+          <p className="text-xs text-slate-500 dark:text-zinc-400">
+            {t("certificationsSource", { count: certifications.length })}
+          </p>
+        </Reveal>
+        <CertificationBadges />
       </div>
     </section>
   );
