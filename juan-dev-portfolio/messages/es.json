@@ -32,9 +32,9 @@
       },
       {
         "period": "Desde abril 2026",
-        "title": "Desarrollador Web · Plataforma de soporte en hardware",
-        "org": "Proyecto en equipo",
-        "description": "Sitio web para asesorar en la selección de componentes: diseño enfocado en claridad y utilidad, con contenido técnico accesible."
+        "title": "Desarrollador Full Stack · Kova Studio",
+        "org": "Equipo de 3 · Desarrollo propio",
+        "description": "E-commerce de hardware en producción: catálogo, configurador «Arma tu PC», carrito, checkout y panel de administración, con Next.js, TypeScript y Supabase."
       }
     ],
     "languages": [
@@ -158,7 +158,14 @@
       "vscode": "Mi entorno principal para desarrollar y experimentar.",
       "wordpress": "Creación y personalización de sitios web.",
       "excel": "Organización, análisis y manejo de información.",
-      "tns": "Gestión y trabajo con información empresarial."
+      "tns": "Gestión y trabajo con información empresarial.",
+      "typescript": "Tipado estático para código más claro y seguro.",
+      "react": "Interfaces por componentes, reutilizables e interactivas.",
+      "nextjs": "Aplicaciones web full stack con renderizado en servidor.",
+      "tailwind": "Estilos rápidos y consistentes con clases utilitarias.",
+      "postgresql": "Base de datos relacional con reglas, funciones y seguridad.",
+      "supabase": "Backend con PostgreSQL, autenticación y almacenamiento.",
+      "vercel": "Despliegue y publicación de aplicaciones web."
     },
     "approaches": {
       "mvp": {

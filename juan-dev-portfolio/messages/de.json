@@ -32,9 +32,9 @@
       },
       {
         "period": "Seit April 2026",
-        "title": "Webentwickler · Hardware-Beratungsplattform",
-        "org": "Teamprojekt",
-        "description": "Website zur Beratung bei der Auswahl von Komponenten: Design mit Fokus auf Klarheit und Nutzen, mit verständlichen technischen Inhalten."
+        "title": "Full-Stack-Entwickler · Kova Studio",
+        "org": "3er-Team · Alleiniger Entwickler",
+        "description": "Ein Hardware-Onlineshop live in Produktion: Katalog, „Stell deinen PC zusammen“-Konfigurator, Warenkorb, Checkout und Admin-Bereich, gebaut mit Next.js, TypeScript und Supabase."
       }
     ],
     "languages": [
@@ -158,7 +158,14 @@
       "vscode": "Meine Hauptumgebung zum Entwickeln und Experimentieren.",
       "wordpress": "Erstellung und Anpassung von Websites.",
       "excel": "Organisieren, Analysieren und Verwalten von Informationen.",
-      "tns": "Verwaltung und Arbeit mit Unternehmensdaten."
+      "tns": "Verwaltung und Arbeit mit Unternehmensdaten.",
+      "typescript": "Statische Typisierung für klareren, sichereren Code.",
+      "react": "Komponentenbasierte, wiederverwendbare und interaktive Oberflächen.",
+      "nextjs": "Full-Stack-Web-Apps mit serverseitigem Rendering.",
+      "tailwind": "Schnelles, einheitliches Styling mit Utility-Klassen.",
+      "postgresql": "Relationale Datenbank mit Regeln, Funktionen und Sicherheit.",
+      "supabase": "Backend mit PostgreSQL, Authentifizierung und Speicher.",
+      "vercel": "Deployment und Veröffentlichung von Web-Apps."
     },
     "approaches": {
       "mvp": {
